@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_profile">
 
     <fragment
         android:id="@+id/nav_home"
@@ -22,4 +22,49 @@
         android:name="com.example.appliactionsupportingdiabetics.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.appliactionsupportingdiabetics.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_medicines"
+        android:name="com.example.appliactionsupportingdiabetics.ui.medicines.MedicinesFragment"
+        android:label="@string/menu_medicines"
+        tools:layout="@layout/fragment_medicines" />
+    <fragment
+        android:id="@+id/nav_diet"
+        android:name="com.example.appliactionsupportingdiabetics.ui.diet.DietFragment"
+        android:label="@string/menu_diet"
+        tools:layout="@layout/fragment_diet" />
+    <fragment
+        android:id="@+id/nav_glucose_measurements"
+        android:name="com.example.appliactionsupportingdiabetics.ui.glucose_measurements.GlucoseMeasurementsFragment"
+        android:label="@string/menu_glucose_measurements"
+        tools:layout="@layout/fragment_glucose_measurements" />
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.example.appliactionsupportingdiabetics.ui.help.HelpFragment"
+        android:label="@string/menu_help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/nav_journal"
+        android:name="com.example.appliactionsupportingdiabetics.ui.journal.JournalFragment"
+        android:label="@string/menu_journal"
+        tools:layout="@layout/fragment_journal" />
+    <fragment
+        android:id="@+id/nav_reports"
+        android:name="com.example.appliactionsupportingdiabetics.ui.reports.ReportsFragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/fragment_reports" />
+    <fragment
+        android:id="@+id/nav_schedule"
+        android:name="com.example.appliactionsupportingdiabetics.ui.schedule.ScheduleFragment"
+        android:label="@string/menu_schedule"
+        tools:layout="@layout/fragment_schedule" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.appliactionsupportingdiabetics.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
