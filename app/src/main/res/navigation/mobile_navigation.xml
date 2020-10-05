@@ -7,47 +7,47 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.pg.DiA.ui.profile.ProfileFragment"
+        android:name="edu.pg.DiA.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nav_medicines"
-        android:name="com.pg.DiA.ui.medicines.MedicinesFragment"
+        android:name="edu.pg.DiA.ui.medicines.MedicinesFragment"
         android:label="@string/menu_medicines"
         tools:layout="@layout/fragment_medicines" />
     <fragment
         android:id="@+id/nav_diet"
-        android:name="com.pg.DiA.ui.diet.DietFragment"
+        android:name="edu.pg.DiA.ui.diet.DietFragment"
         android:label="@string/menu_diet"
         tools:layout="@layout/fragment_diet" />
     <fragment
         android:id="@+id/nav_glucose_measurements"
-        android:name="com.pg.DiA.ui.glucose_measurements.GlucoseMeasurementsFragment"
+        android:name="edu.pg.DiA.ui.glucose_measurements.GlucoseMeasurementsFragment"
         android:label="@string/menu_glucose_measurements"
         tools:layout="@layout/fragment_glucose_measurements" />
     <fragment
         android:id="@+id/nav_help"
-        android:name="com.pg.DiA.ui.help.HelpFragment"
+        android:name="edu.pg.DiA.ui.help.HelpFragment"
         android:label="@string/menu_help"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/nav_journal"
-        android:name="com.pg.DiA.ui.journal.JournalFragment"
+        android:name="edu.pg.DiA.ui.journal.JournalFragment"
         android:label="@string/menu_journal"
         tools:layout="@layout/fragment_journal" />
     <fragment
         android:id="@+id/nav_reports"
-        android:name="com.pg.DiA.ui.reports.ReportsFragment"
+        android:name="edu.pg.DiA.ui.reports.ReportsFragment"
         android:label="@string/menu_reports"
         tools:layout="@layout/fragment_reports" />
     <fragment
         android:id="@+id/nav_schedule"
-        android:name="com.pg.DiA.ui.schedule.ScheduleFragment"
+        android:name="edu.pg.DiA.ui.schedule.ScheduleFragment"
         android:label="@string/menu_schedule"
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.pg.DiA.ui.settings.SettingsFragment"
+        android:name="edu.pg.DiA.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
