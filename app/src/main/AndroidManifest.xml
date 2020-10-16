@@ -10,9 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="edu.pg.DiA.MainActivity"
+            android:name=".LoadProfilesActivity"
+            android:label="@string/title_activity_load_profiles"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".AddNewProfileActivity"
+            android:label="@string/add_new_profile"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

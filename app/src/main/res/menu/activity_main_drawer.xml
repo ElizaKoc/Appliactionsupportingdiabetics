@@ -14,14 +14,26 @@
             android:id="@+id/nav_medicines"
             android:icon="@drawable/ic_baseline_local_pharmacy_24"
             android:title="@string/menu_medicines" />
-        <item
-            android:id="@+id/nav_glucose_measurements"
-            android:icon="@drawable/ic_baseline_local_drink_24"
-            android:title="@string/menu_glucose_measurements" />
-        <item
-            android:id="@+id/nav_diet"
-            android:icon="@drawable/ic_baseline_local_dining_24"
-            android:title="@string/menu_diet" />
+        <item android:title="@string/measurements">
+            <menu>
+                <item
+                    android:id="@+id/nav_glucose_measurements"
+                    android:icon="@drawable/ic_baseline_local_drink_24"
+                    android:title="@string/menu_glucose_measurements" />
+                <item
+                    android:id="@+id/nav_weight_measurements"
+                    android:icon="@drawable/ic_baseline_accessibility_24"
+                    android:title="@string/menu_weight_measurements" />
+            </menu>
+        </item>
+        <item android:title="@string/diet">
+            <menu>
+                <item
+                    android:id="@+id/nav_diet"
+                    android:icon="@drawable/ic_baseline_local_dining_24"
+                    android:title="@string/menu_diet" />
+            </menu>
+        </item>
         <item
             android:id="@+id/nav_journal"
             android:icon="@drawable/ic_baseline_import_contacts_24"
@@ -35,7 +47,10 @@
             android:icon="@drawable/ic_baseline_insert_chart_24"
             android:title="@string/menu_reports" />
     </group>
-    <group android:id="@+id/gr2" >
+    <group
+        android:id="@+id/gr2"
+        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_baseline_help_24"
