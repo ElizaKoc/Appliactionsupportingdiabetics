@@ -10,13 +10,14 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.database.dao.UserDao;
 import edu.pg.DiA.models.User;
 
 public class ProfileListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<Integer> mText;
     public LiveData<List<User>> profiles;
     public UserDao userDao;
 
@@ -26,9 +27,12 @@ public class ProfileListViewModel extends AndroidViewModel {
 
         userDao = AppDatabase.getInstance(application.getApplicationContext()).userDao();
         profiles = userDao.getAll();
+
+        mText = new MutableLiveData<>();
+        mText.setValue(R.string.menu_profile_list);
     }
 
-    public LiveData<String> getText() {
+    public LiveData<Integer> getTitle() {
         return mText;
     }
 }

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoadProfilesActivity.class);
         startActivity(intent);
 
-        db.userDao().insert(new User("TEST", "Pink", 5, 50, "M"));
+        //db.userDao().insert(new User("TEST", "Pink", 5, 50, "M"));
         //List<User> t = (List<User>) db.userDao().getAll();
 
         /*FloatingActionButton fab = findViewById(R.id.fab);

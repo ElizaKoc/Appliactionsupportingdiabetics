@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -19,7 +20,9 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import edu.pg.DiA.ui.add_new_profile.AddNewProfileFragment;
 import edu.pg.DiA.ui.profile_list.ProfileListFragment;
 
 public class LoadProfilesActivity extends AppCompatActivity{
@@ -34,8 +37,22 @@ public class LoadProfilesActivity extends AppCompatActivity{
         setContentView(R.layout.activity_load_profiles);
         Toolbar toolbar = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                /*Fragment profileListFragment = new ProfileListFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.profile_list_fragment, profileListFragment);
+                transaction.setReorderingAllowed(true).addToBackStack(null);
+                transaction.commit();*/
+
+                onBackPressed();
+
+                Toast.makeText(getApplicationContext(), "Back clicked!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ft.add(R.id.profile_list_fragment, profileListFragment);
         ft.commit();
@@ -43,7 +60,7 @@ public class LoadProfilesActivity extends AppCompatActivity{
 
         //mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_profile_list, R.id.nav_add_new_profile).build();
         //NavController navController = Navigation.findNavController(this, R.id.profile_list_fragment);
-       // NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     }
 
     @Override

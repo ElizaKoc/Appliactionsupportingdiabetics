@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -56,6 +58,9 @@ public class ProfileListFragment extends Fragment {
     }
 
     private void updateData() {
+
+        ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+
         ProfileListViewModel profileListViewModel = ViewModelProviders.of(this).get(ProfileListViewModel.class);
         profileListViewModel.profiles.observe(getViewLifecycleOwner(), new Observer<List<User>>() {
 
@@ -63,6 +68,14 @@ public class ProfileListFragment extends Fragment {
             public void onChanged(@Nullable List<User> users) {
                 profiles = users;
                 profileListAdapter.setProfiles(profiles);
+            }
+        });
+
+        profileListViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer i) {
+                ab.setDisplayHomeAsUpEnabled(false);
+                ab.setTitle(i);
             }
         });
     }
