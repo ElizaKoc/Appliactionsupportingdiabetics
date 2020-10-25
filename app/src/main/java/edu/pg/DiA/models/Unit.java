@@ -13,4 +13,8 @@ public class Unit {
 
     @ColumnInfo(name = "name")
     public String name;
+
+    public Unit(String name) {
+        this.name = name;
+    }
 }

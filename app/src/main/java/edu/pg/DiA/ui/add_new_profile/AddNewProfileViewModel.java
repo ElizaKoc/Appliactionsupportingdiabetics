@@ -18,7 +18,7 @@ public class AddNewProfileViewModel extends AndroidViewModel {
         super(application);
 
         mText = new MutableLiveData<>();
-        mText.setValue(R.string.add_new_profile);
+        mText.setValue(R.string.menu_add_new_profile);
     }
 
     public LiveData<Integer> getTitle() {

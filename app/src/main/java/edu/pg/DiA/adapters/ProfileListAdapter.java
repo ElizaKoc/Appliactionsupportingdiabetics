@@ -1,6 +1,7 @@
 package edu.pg.DiA.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.SecondActivity;
 import edu.pg.DiA.holders.ProfileListViewHolder;
 import edu.pg.DiA.models.User;
 
@@ -46,8 +48,17 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHold
     public void onBindViewHolder(ProfileListViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(changeProfiles.get(position).firstName);
-
+        //holder.userId.setText(changeProfiles.get(position).uId);
+        holder.userFirstName.setText(changeProfiles.get(position).firstName);
+        holder.userLastName.setText(changeProfiles.get(position).lastName);
+        holder.profileListItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SecondActivity.class);
+                intent.putExtra("firstName", String.valueOf(changeProfiles.get(position).firstName));
+                context.startActivity(intent);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -2,55 +2,37 @@ package edu.pg.DiA;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-import edu.pg.DiA.R;
-import edu.pg.DiA.database.AppDatabase;
-import edu.pg.DiA.models.User;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.room.Room;
 
-import java.util.List;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
-    public AppDatabase db;
+    private AppBarConfiguration mAppBarConfiguration;
+    private TextView navFirstName;
+    private String firstName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        db = AppDatabase.getInstance(getApplicationContext());
-
-        Intent intent = new Intent(MainActivity.this, LoadProfilesActivity.class);
-        startActivity(intent);
-
-        //db.userDao().insert(new User("TEST", "Pink", 1995, 150, "M"));
-        //List<User> t = (List<User>) db.userDao().getAll();
-
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -61,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);*/
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        View hView =  navigationView.getHeaderView(0);
+        navFirstName = (TextView)hView.findViewById(R.id.nav_first_name);
+        getAndSetIntentData();
     }
 
     @Override
@@ -74,5 +60,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+    private void getAndSetIntentData() {
+        if(getIntent().hasExtra("firstName")) {
+            //Getting Data from Intent
+            firstName = getIntent().getStringExtra("firstName");
+
+            //Setting Intent Data
+            navFirstName.setText(firstName);
+        } else{
+            Toast.makeText(this, "Brak danych do wyświetlenia", Toast.LENGTH_SHORT).show();
+        }
     }
 }

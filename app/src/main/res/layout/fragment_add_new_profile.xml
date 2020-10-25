@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".ui.add_new_profile.AddNewProfileFragment">
 
     <EditText
@@ -12,13 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,13 +40,15 @@
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_name" />
 
     <EditText
-        android:id="@+id/age"
+        android:id="@+id/birth_year"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -52,9 +57,11 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:ems="10"
-        android:hint="@string/age"
+        android:hint="@string/birth_year"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,10 +80,12 @@
         android:hint="@string/height_cm"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age" />
+        app:layout_constraintTop_toBottomOf="@+id/birth_year" />
 
     <Spinner
         android:id="@+id/spinner_sex"
@@ -93,5 +102,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/height_cm" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:text="@string/add_button_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_sex" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

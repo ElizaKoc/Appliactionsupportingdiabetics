@@ -35,4 +35,9 @@ public class Meal_instance {
     @ColumnInfo(name = "date")
     @TypeConverters({TimestampConverter.class})
     public Date date;
+
+    public Meal_instance(int mlId, Date date) {
+        this.mlId = mlId;
+        this.date = date;
+    }
 }

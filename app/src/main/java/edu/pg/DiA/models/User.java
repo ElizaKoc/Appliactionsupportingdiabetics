@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import edu.pg.DiA.database.AppDatabase;
+
 @Entity(tableName = "user")
 public class User {
     @PrimaryKey(autoGenerate = true)
@@ -16,8 +18,8 @@ public class User {
     @ColumnInfo(name = "last_name")
     public String lastName;
 
-    @ColumnInfo(name = "age")
-    public int age;
+    @ColumnInfo(name = "birth_year")
+    public int birth_year;
 
     @ColumnInfo(name = "height_cm")
     public int height_cm;
@@ -25,10 +27,10 @@ public class User {
     @ColumnInfo(name = "sex")
     public String sex;
 
-    public User(String firstName, String lastName, int age, int height_cm, String sex) {
+    public User(String firstName, String lastName, int birth_year, int height_cm, String sex) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.birth_year = birth_year;
         this.height_cm = height_cm;
         this.sex = sex;
     }

@@ -41,4 +41,11 @@ public class Medicine {
 
     @ColumnInfo(name = "description")
     public String description;
+
+    public Medicine(int userId, int unitId, String name, String description) {
+        this.userId = userId;
+        this.unitId = unitId;
+        this.name = name;
+        this.description = description;
+    }
 }

@@ -12,4 +12,8 @@ public class Meal_type {
 
     @ColumnInfo(name = "name")
     public String name;
+
+    public Meal_type(String name) {
+        this.name = name;
+    }
 }

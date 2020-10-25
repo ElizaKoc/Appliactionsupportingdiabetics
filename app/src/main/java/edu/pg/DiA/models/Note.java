@@ -41,4 +41,11 @@ public class Note {
     @ColumnInfo(name = "date")
     @TypeConverters({TimestampConverter.class})
     public Date date;
+
+    public Note(int userId, String name, String description) {
+        this.userId = userId;
+        this.name = name;
+        this.description = description;
+        this.date = new Date();
+    }
 }

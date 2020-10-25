@@ -16,8 +16,8 @@ public interface BodyWeightMeasurementDao {
     List<Body_weight_measurement> getAll();
 
     @Insert
-    void insertAll(Body_weight_measurement... xs);
+    void insertAll(Body_weight_measurement... measurements);
 
     @Delete
-    void delete(Body_weight_measurement x);
+    void delete(Body_weight_measurement measurement);
 }

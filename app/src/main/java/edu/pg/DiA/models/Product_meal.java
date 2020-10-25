@@ -34,4 +34,10 @@ public class Product_meal {
 
     @ColumnInfo(name = "unit_quantity")
     public float unitQuantity;
+
+    public Product_meal(int pId, int mlId, float unitQuantity) {
+        this.pId = pId;
+        this.mlId = mlId;
+        this.unitQuantity = unitQuantity;
+    }
 }

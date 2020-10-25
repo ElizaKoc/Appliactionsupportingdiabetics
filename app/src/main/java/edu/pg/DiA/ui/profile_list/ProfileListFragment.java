@@ -1,7 +1,6 @@
 package edu.pg.DiA.ui.profile_list;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-import edu.pg.DiA.AddNewProfileActivity;
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.ProfileListAdapter;
 import edu.pg.DiA.models.User;

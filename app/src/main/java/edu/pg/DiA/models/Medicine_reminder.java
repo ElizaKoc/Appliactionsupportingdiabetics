@@ -34,4 +34,10 @@ public class Medicine_reminder {
 
     @ColumnInfo(name = "dose_units")
     public String doseUnits;
+
+    public Medicine_reminder(int medicineId, int reminderId, String doseUnits) {
+        this.medicineId = medicineId;
+        this.reminderId = reminderId;
+        this.doseUnits = doseUnits;
+    }
 }

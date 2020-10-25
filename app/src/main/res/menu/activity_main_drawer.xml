@@ -26,14 +26,10 @@
                     android:title="@string/menu_weight_measurements" />
             </menu>
         </item>
-        <item android:title="@string/diet">
-            <menu>
-                <item
-                    android:id="@+id/nav_diet"
-                    android:icon="@drawable/ic_baseline_local_dining_24"
-                    android:title="@string/menu_diet" />
-            </menu>
-        </item>
+        <item
+            android:id="@+id/nav_diet"
+            android:icon="@drawable/ic_baseline_local_dining_24"
+            android:title="@string/menu_diet" />
         <item
             android:id="@+id/nav_journal"
             android:icon="@drawable/ic_baseline_import_contacts_24"

@@ -1,5 +1,6 @@
 package edu.pg.DiA;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +21,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import edu.pg.DiA.ui.add_new_profile.AddNewProfileFragment;
@@ -56,11 +59,16 @@ public class LoadProfilesActivity extends AppCompatActivity{
 
         ft.add(R.id.profile_list_fragment, profileListFragment);
         ft.commit();
+
         //layout.setVisibility(View.VISIBLE);
 
         //mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_profile_list, R.id.nav_add_new_profile).build();
         //NavController navController = Navigation.findNavController(this, R.id.profile_list_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+    }
+
+    public String getTest() {
+        return "TEST";
     }
 
     @Override

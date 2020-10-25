@@ -31,4 +31,12 @@ public class Reminder {
     @ColumnInfo(name = "date")
     @TypeConverters({TimestampConverter.class})
     public Date date;
+
+    public Reminder(String alarm, int repeat, String weekday, String time, Date date) {
+        this.alarm = alarm;
+        this.repeat = repeat;
+        this.weekday = weekday;
+        this.time = time;
+        this.date = date;
+    }
 }

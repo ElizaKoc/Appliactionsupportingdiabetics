@@ -46,4 +46,10 @@ public class Glucose_measurement {
     @ColumnInfo(name = "date")
     @TypeConverters({TimestampConverter.class})
     public Date date;
+
+    public Glucose_measurement(int reminderId, int userId, float dose) {
+        this.reminderId = reminderId;
+        this.userId = userId;
+        this.dose = dose;
+    }
 }

@@ -37,4 +37,10 @@ public class Meal {
 
     @ColumnInfo(name = "description")
     public String description;
+
+    public Meal(int userId, int mealTypeId, String description) {
+        this.userId = userId;
+        this.mealTypeId = mealTypeId;
+        this.description = description;
+    }
 }

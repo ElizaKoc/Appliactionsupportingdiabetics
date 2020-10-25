@@ -45,7 +45,7 @@ import edu.pg.DiA.models.User;
         Reminder.class,
         Unit.class
     },
-    version = 1)
+    version = 2)
 
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -61,7 +61,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     super.onCreate(db);
                     //single_instance.rePopulateDB();
                 }
-            }).fallbackToDestructiveMigration().createFromAsset("database_defaults/default.db").build();
+            }).fallbackToDestructiveMigration().createFromAsset("database_defaults/default_data.db").build();
 
         return single_instance;
     }

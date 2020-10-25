@@ -46,4 +46,12 @@ public class Product {
 
     @ColumnInfo(name = "sugar_grams_per_unit")
     public float sugarGramsPerUnit;
+
+    public Product(String name, int userId, int unitId, float kcalPerUnit, float sugarGramsPerUnit) {
+        this.name = name;
+        this.userId = userId;
+        this.unitId = unitId;
+        this.kcalPerUnit = kcalPerUnit;
+        this.sugarGramsPerUnit = sugarGramsPerUnit;
+    }
 }

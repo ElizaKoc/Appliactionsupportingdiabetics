@@ -38,4 +38,9 @@ public class Body_weight_measurement {
     @ColumnInfo(name = "date")
     @TypeConverters({TimestampConverter.class})
     public Date date;
+
+    public Body_weight_measurement(int userId, float weightKg) {
+        this.userId = userId;
+        this.weightKg = weightKg;
+    }
 }
