@@ -26,6 +26,7 @@ import androidx.room.PrimaryKey;
     )
 
 public class Medicine_reminder {
+
     @ColumnInfo(name = "medicine_id")
     public int medicineId;
 

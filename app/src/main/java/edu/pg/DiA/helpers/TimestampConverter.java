@@ -11,7 +11,7 @@ public class TimestampConverter {
     @TypeConverter
     public static Date fromTimestamp(String value) {
         try {
-            return value == null ? null : new SimpleDateFormat("dd/MM/yyyy").parse(value);
+            return value == null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(value);
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
@@ -21,7 +21,7 @@ public class TimestampConverter {
     @TypeConverter
     public static String dateToTimestamp(Date date) {
 
-        String strDate = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(date);
+        String strDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
         return date == null ? null : strDate;
     }
 }

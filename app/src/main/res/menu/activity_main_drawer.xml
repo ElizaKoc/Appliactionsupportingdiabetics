@@ -14,46 +14,50 @@
             android:id="@+id/nav_medicines"
             android:icon="@drawable/ic_baseline_local_pharmacy_24"
             android:title="@string/menu_medicines" />
-        <item android:title="@string/measurements">
-            <menu>
-                <item
-                    android:id="@+id/nav_glucose_measurements"
-                    android:icon="@drawable/ic_baseline_local_drink_24"
-                    android:title="@string/menu_glucose_measurements" />
-                <item
-                    android:id="@+id/nav_weight_measurements"
-                    android:icon="@drawable/ic_baseline_accessibility_24"
-                    android:title="@string/menu_weight_measurements" />
-            </menu>
-        </item>
         <item
+            android:id="@+id/nav_glucose_measurements"
+            android:icon="@drawable/ic_baseline_local_drink_24"
+            android:title="@string/menu_glucose_measurements" />
+        <item
+            android:id="@+id/nav_weight_measurements"
+            android:icon="@drawable/ic_baseline_accessibility_24"
+            android:title="@string/menu_weight_measurements" />
+        <!--<item
             android:id="@+id/nav_diet"
             android:icon="@drawable/ic_baseline_local_dining_24"
-            android:title="@string/menu_diet" />
-        <item
-            android:id="@+id/nav_journal"
-            android:icon="@drawable/ic_baseline_import_contacts_24"
-            android:title="@string/menu_journal" />
+            android:title="@string/menu_diet" />-->
         <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_baseline_insert_invitation_24"
             android:title="@string/menu_schedule" />
         <item
+            android:id="@+id/nav_journal"
+            android:icon="@drawable/ic_baseline_import_contacts_24"
+            android:title="@string/menu_journal" />
+        <!--<item
             android:id="@+id/nav_reports"
             android:icon="@drawable/ic_baseline_insert_chart_24"
-            android:title="@string/menu_reports" />
+            android:title="@string/menu_reports" />-->
+        <item
+            android:id="@+id/nav_literature"
+            android:icon="@drawable/ic_baseline_library_books_24"
+            android:title="@string/menu_literature" />
     </group>
     <group
         android:id="@+id/gr2"
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/menu_settings" />
+        <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_baseline_help_24"
             android:title="@string/menu_help" />
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/menu_settings" />
+            android:id="@+id/nav_profile_list"
+            android:icon="@drawable/ic_baseline_supervisor_account_24"
+            android:title="@string/menu_change_profile" />
     </group>
 </menu>

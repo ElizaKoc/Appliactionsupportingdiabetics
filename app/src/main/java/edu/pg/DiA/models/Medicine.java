@@ -42,7 +42,8 @@ public class Medicine {
     @ColumnInfo(name = "description")
     public String description;
 
-    public Medicine(int userId, int unitId, String name, String description) {
+    public Medicine(int mId, int userId, int unitId, String name, String description) {
+        this.mId = mId;
         this.userId = userId;
         this.unitId = unitId;
         this.name = name;

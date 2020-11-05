@@ -16,6 +16,12 @@ public interface UserDao {
     @Query("SELECT * FROM user ORDER BY first_name ASC")
     LiveData<List<User>> getAll();
 
+    @Query("SELECT * FROM user WHERE id = :userId")
+    User getUser(int userId);
+
+    @Query("SELECT * FROM user WHERE id = :userId")
+    LiveData<User> getUserLive(int userId);
+
     /*@Query("SELECT * FROM user WHERE id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 

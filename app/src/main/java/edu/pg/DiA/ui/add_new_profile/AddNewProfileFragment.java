@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,19 +17,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.jetbrains.annotations.NotNull;
 
-import edu.pg.DiA.LoadProfilesActivity;
-import edu.pg.DiA.MainActivity;
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.models.User;
-import edu.pg.DiA.ui.profile_list.ProfileListFragment;
 
 public class AddNewProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -59,9 +53,9 @@ public class AddNewProfileFragment extends Fragment implements AdapterView.OnIte
         Context context = getActivity().getApplicationContext();
         Spinner spinner = (Spinner) root.findViewById(R.id.spinner_sex);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.sex_array, R.layout.spinner_item); //android.R.layout.simple_spinner_item custom
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.sex_array, R.layout.spinner_item_add_profile); //android.R.layout.simple_spinner_item custom
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item); //android.R.layout.simple_spinner_dropdown_item custom
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item_add_profile); //android.R.layout.simple_spinner_dropdown_item custom
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
     }
@@ -88,7 +82,7 @@ public class AddNewProfileFragment extends Fragment implements AdapterView.OnIte
 
         createSpinner(root);
 
-        Button addButton =  root.findViewById(R.id.add_button);
+        Button addButton =  root.findViewById(R.id.add_button_new_profile);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +126,7 @@ public class AddNewProfileFragment extends Fragment implements AdapterView.OnIte
         if(firstName.equals("") || lastName.equals("") || birthYear == 0 || height == 0 || gender.equals("")) {
             return null;
         }
-       return new User(firstName, lastName, birthYear, height, gender);
+       return new User(0, firstName, lastName, birthYear, height, gender);
     }
 
     private void clear() {

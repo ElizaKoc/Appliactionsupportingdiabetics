@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "730187be6e3cd49be46d4a1920b27330",
+    "identityHash": "f316be125a72959650bcf88a09c01980",
     "entities": [
       {
         "tableName": "user",
@@ -115,7 +115,7 @@
       },
       {
         "tableName": "glucose_measurement",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `reminder_id` INTEGER NOT NULL, `user_id` INTEGER NOT NULL, `measurements_mg/dL` REAL NOT NULL, `date` TEXT, FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`reminder_id`) REFERENCES `reminder`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `reminder_id` INTEGER, `user_id` INTEGER NOT NULL, `measurements_mg/dL` REAL NOT NULL, `date` TEXT, FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`reminder_id`) REFERENCES `reminder`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "gmId",
@@ -127,7 +127,7 @@
             "fieldPath": "reminderId",
             "columnName": "reminder_id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "userId",
@@ -819,7 +819,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '730187be6e3cd49be46d4a1920b27330')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f316be125a72959650bcf88a09c01980')"
     ]
   }
 }

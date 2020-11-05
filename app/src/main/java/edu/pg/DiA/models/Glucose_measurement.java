@@ -7,6 +7,8 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Date;
 
 import edu.pg.DiA.helpers.TimestampConverter;
@@ -34,8 +36,8 @@ public class Glucose_measurement {
     @ColumnInfo(name = "id")
     public int gmId;
 
-    @ColumnInfo(name = "reminder_id")
-    public int reminderId;
+    @ColumnInfo(name = "reminder_id", defaultValue = "NULL")
+    public Integer reminderId;
 
     @ColumnInfo(name = "user_id")
     public int userId;
@@ -47,9 +49,11 @@ public class Glucose_measurement {
     @TypeConverters({TimestampConverter.class})
     public Date date;
 
-    public Glucose_measurement(int reminderId, int userId, float dose) {
+    public Glucose_measurement(int gmId, @Nullable Integer reminderId, int userId, float dose, Date date) {
+        this.gmId = gmId;
         this.reminderId = reminderId;
         this.userId = userId;
         this.dose = dose;
+        this.date = date;
     }
 }

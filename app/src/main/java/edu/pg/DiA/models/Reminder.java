@@ -1,5 +1,6 @@
 package edu.pg.DiA.models;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -19,9 +20,6 @@ public class Reminder {
     @ColumnInfo(name = "alarm")
     public String alarm;
 
-    @ColumnInfo(name = "repeat")
-    public int repeat = 0;
-
     @ColumnInfo(name = "weekday")
     public String weekday;
 
@@ -32,9 +30,9 @@ public class Reminder {
     @TypeConverters({TimestampConverter.class})
     public Date date;
 
-    public Reminder(String alarm, int repeat, String weekday, String time, Date date) {
+    public Reminder(int rId, String alarm, @Nullable String weekday, String time, @Nullable Date date) {
+        this.rId = rId;
         this.alarm = alarm;
-        this.repeat = repeat;
         this.weekday = weekday;
         this.time = time;
         this.date = date;

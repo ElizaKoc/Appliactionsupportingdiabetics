@@ -39,8 +39,10 @@ public class Body_weight_measurement {
     @TypeConverters({TimestampConverter.class})
     public Date date;
 
-    public Body_weight_measurement(int userId, float weightKg) {
+    public Body_weight_measurement(int bwmId, int userId, float weightKg, Date date) {
+        this.bwmId = bwmId;
         this.userId = userId;
         this.weightKg = weightKg;
+        this.date = date;
     }
 }

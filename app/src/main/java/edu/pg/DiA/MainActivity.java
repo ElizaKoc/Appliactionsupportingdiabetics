@@ -1,10 +1,16 @@
 package edu.pg.DiA;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -12,9 +18,26 @@ import com.google.android.material.navigation.NavigationView;
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.models.User;
+import edu.pg.DiA.ui.diet.DietFragment;
+import edu.pg.DiA.ui.glucose_measurements.GlucoseMeasurementsFragment;
+import edu.pg.DiA.ui.help.HelpFragment;
+import edu.pg.DiA.ui.journal.JournalFragment;
+import edu.pg.DiA.ui.medicines.MedicinesFragment;
+import edu.pg.DiA.ui.profile.ProfileFragment;
+import edu.pg.DiA.ui.profile_list.ProfileListFragment;
+import edu.pg.DiA.ui.reports.ReportsFragment;
+import edu.pg.DiA.ui.schedule.ScheduleFragment;
+import edu.pg.DiA.ui.settings.SettingsFragment;
+import edu.pg.DiA.ui.weight_measurements.WeightMeasurementsFragment;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ReportFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,19 +49,72 @@ import androidx.room.Room;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     public AppDatabase db;
+    protected AppBarConfiguration mAppBarConfiguration;
+    protected TextView navFirstName;
+    private  Toolbar toolbar;
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout drawer;
+    private FragmentManager fragmentManager;
+    private MenuItem setHighlightProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_main);
         db = AppDatabase.getInstance(getApplicationContext());
 
-        Intent intent = new Intent(MainActivity.this, LoadProfilesActivity.class);
-        startActivity(intent);
+        Context context = getApplicationContext();
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        int userId = sharedPref.getInt(getString(R.string.preference_file_key), 0);
+
+        if(userId != 0) {
+            User user = db.userDao().getUser(userId);
+            User.setUser(user);
+
+            toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            drawer = findViewById(R.id.drawer_layout);
+            drawerToggle = setupDrawerToggle();
+            // Setup toggle to display hamburger icon with nice animation
+            drawerToggle.setDrawerIndicatorEnabled(true);
+            drawerToggle.syncState();
+            drawer.addDrawerListener(drawerToggle);
+
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            setupDrawerContent(navigationView);
+            setHighlightProfile = navigationView.getMenu().findItem(R.id.nav_profile);
+            setHighlightProfile.setChecked(true);
+
+            // Passing each menu ID as a set of Ids because each
+            // menu should be considered as top level destinations.
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_profile, R.id.nav_medicines, R.id.nav_diet, R.id.nav_glucose_measurements, R.id.nav_weight_measurements, R.id.nav_help, R.id.nav_journal, R.id.nav_reports, R.id.nav_settings, R.id.nav_schedule)
+                    .setDrawerLayout(drawer)
+                    .build();
+            //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+            //NavigationUI.setupWithNavController(navigationView, navController);
+
+            View hView =  navigationView.getHeaderView(0);
+            navFirstName = (TextView)hView.findViewById(R.id.nav_first_name);
+            navFirstName.setText(User.getCurrentUser().firstName);
+
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+        } else {
+
+            Intent intent = new Intent(MainActivity.this, LoadProfilesActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+
 
         //db.userDao().insert(new User("TEST", "Pink", 1995, 150, "M"));
         //List<User> t = (List<User>) db.userDao().getAll();
@@ -65,6 +141,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            ProfileFragment profile = (ProfileFragment) fragmentManager.findFragmentByTag("profile");
+            if(profile != null && profile.isVisible()) {
+                super.onBackPressed();
+            }else {
+                fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+
+                if(setHighlightProfile != null) {
+                    setHighlightProfile.setChecked(true);
+                }
+            }
+
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -73,6 +168,146 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_settings) {
+
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    /*@Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }*/
+
+    /*protected void getAndSetIntentData() {
+        if(getIntent().hasExtra("firstName")) {
+            //Getting Data from Intent
+            firstName = getIntent().getStringExtra("firstName");
+
+            //Setting Intent Data
+            navFirstName.setText(firstName);
+        } else{
+            Toast.makeText(this, "Brak danych do wyświetlenia", Toast.LENGTH_SHORT).show();
+        }
+    } */
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        switch (item.getItemId()) {
+
+            case R.id.action_settings: {
+                Intent intent = new Intent(this, LoadProfilesActivity.class);
+                startActivity(intent);
+                this.finish();
+                break;
+            }
+        }
+        //close navigation drawer
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        String tag = "";
+        Class fragmentClass;
+        int id = menuItem.getItemId();
+        if(id == R.id.nav_profile) {
+            fragmentClass = ProfileFragment.class;
+            tag = "profile";
+        }
+        else if(id == R.id.nav_medicines) {
+            fragmentClass = MedicinesFragment.class;
+        }
+        else if(id == R.id.nav_glucose_measurements) {
+            fragmentClass = GlucoseMeasurementsFragment.class;
+        }
+        else if(id == R.id.nav_weight_measurements) {
+            fragmentClass = WeightMeasurementsFragment.class;
+        }
+        /*else if(id == R.id.nav_diet) {
+            fragmentClass = DietFragment.class;
+        }*/
+        else if(id == R.id.nav_schedule) {
+            fragmentClass = ScheduleFragment.class;
+        }
+        else if(id == R.id.nav_journal) {
+            fragmentClass = JournalFragment.class;
+        }
+        else if(id == R.id.nav_literature) {
+            fragmentClass = ReportsFragment.class;
+        }
+        /*else if(id == R.id.nav_reports) {
+            fragmentClass = ReportsFragment.class;
+        }*/
+        else if(id == R.id.nav_settings) {
+            fragmentClass = SettingsFragment.class;
+        }
+        else if(id == R.id.nav_help) {
+            fragmentClass = HelpFragment.class;
+        }
+        else if(id == R.id.nav_profile_list) {
+            fragmentClass = ProfileFragment.class;
+            Intent intent = new Intent(this, LoadProfilesActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+        else {
+            fragmentClass = ProfileFragment.class;
+            tag = "profile";
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.change_list_fragment, fragment, (tag.equals("") ? null : tag)).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        drawer.closeDrawers();
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
+        // and will not render the hamburger icon without it.
+        return new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 }

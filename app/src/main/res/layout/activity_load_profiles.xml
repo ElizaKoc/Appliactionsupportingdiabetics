@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/mr_cast_meta_default_text_color"
     tools:context=".LoadProfilesActivity">
 
     <include

@@ -8,7 +8,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="preference_file_key">edu.pg.DiA.userId</string>
 
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- MENU -->
     <!-- Profile list fragments -->
     <string name="menu_profile_list">Lista profili</string>
     <string name="menu_add_new_profile">Dodaj nowy profil</string>
@@ -23,10 +26,13 @@
     <string name="menu_weight_measurements">Pomiary masy ciała</string>    <!--Weight Measurements-->
     <string name="menu_journal">Dziennik</string>    <!--Journal-->
     <string name="menu_schedule">Harmonogram</string>  <!--Schedule-->
+    <string name="menu_reports">Raporty</string>    <!--Reports-->
     <string name="menu_settings">Ustawienia</string>  <!--Settings-->
     <string name="menu_help">Pomoc</string>  <!--Help-->
-    <string name="menu_reports">Raporty</string>    <!--Reports-->
+    <string name="menu_change_profile">Zmień profil</string>    <!--Change profile-->
 
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Profile list-->
     <string name="add_new_profile">Dodaj nowy profil</string>
     <string name="first_name">Podaj imię</string>
     <string name="last_name">Podaj nazwisko</string>
@@ -34,7 +40,7 @@
     <string name="height_cm">Podaj wzrost w cm</string>
     <string name="sex">Podaj płeć</string>
 
-    <!-- Spinner -->
+    <!-- Spinner sex-->
     <string-array name="sex_array">
         <item></item>
         <item>kobieta</item>
@@ -42,9 +48,121 @@
         <item>inna</item>
     </string-array>
 
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Profile-->
+    <string name="profile_name_label">Imię:</string>
+    <string name="profile_surname_label">Nazwisko:</string>
+    <string name="profile_sex_label">Płeć:</string>
+    <string name="profile_age_label">Wiek:</string>
+    <string name="profile_height_label">Wzrost:</string>
+    <string name="profile_height_unit">cm</string>
+    <string name="profile_weight_label">Waga:</string>
+    <string name="profile_weight_unit">kg</string>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Medicine list-->
+    <string name="add_new_medicine">Dodaj nowy lek</string>
+
+    <!--Add medicine-->
+    <string name="menu_add_new_medicine">Dodaj nowy lek</string>
+
+    <string name="medicine_name">Podaj nazwę leku</string>
+    <string name="medicine_description">Podaj opis</string>
+    <string name="medicine_units">Podaj jednostki</string>
+
+    <!--Medicine View-->
+    <string name="medicine_description_label">Opis</string>
+    <string name="medicine_reminder_list_label">Przypomnienia</string>
+    <string name="medicine_reminder_label">Przypomnienie</string>
+    <string name="medicine_reminder_dose_label">Dawka:</string>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Glucose measurements list-->
+    <string name="menu_add_new_glucose_measurement">Dodaj nowy pomiar glukozy</string>
+
+    <string name="glucose_measurement_unit">mg/dL</string>
+    <string name="glucose_measurement_value_txt">Podaj zmierzoną wartość poziomu glukozy we krwi w mg/dL</string>
+    <string name="glucose_measurement_value">Podaj zmierzoną wartość (mg/dL)</string> weight_measurement_unit
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Weight measurements list-->
+    <string name="menu_add_new_weight_measurement">Dodaj nowy pomiar glukozy</string>
+
+    <string name="weight_measurement_unit">kg</string>
+    <string name="weight_measurement_value_txt">Podaj zmierzoną masę ciała w kg</string>
+    <string name="weight_measurement_value">Podaj zmierzoną wartość (kg)</string>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Schedule-->
+    <string name="set_date">Wybierz datę</string>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Reminder-->
+    <string name="menu_add_new_reminder">Dodaj nowe przypomnienie</string>
+
+    <string name="spinner_alarm_type_label">Typ przypomnienia</string>
+    <string name="spinner_medicine_option_label">Nazwa leku</string>
+    <string name="medicine_dose_label">Dawka</string>
+    <string name="reminder_time_label">Godzina</string>
+    <string name="spinner_repeat_label">Czy cyklicznie?</string>
+
+    <string name="reminder_medicine_dose">Podaj dawkę</string>
+    <string name="reminder_date">Podaj datę przypomnienia</string>
+    <string name="reminder_time">Podaj godzinę przypomnienia</string>
+    <string name="reminder_alarm_type">Podaj typ przypomnienia</string>
+    <string name="reminder_weekday">Podaj dzień tygodnia</string>
+    <string name="reminder_repeat">Powiadomienie cykliczne?</string>
+    <string name="reminder_medicine_option">Wybierz istniejący lek</string>
+
+    <!-- Spinner alarm type-->
+    <string-array name="alarm_type_array">
+        <item></item>
+        <item>lekarstwo</item>
+        <item>pomiar glukozy</item>
+    </string-array>
+
+    <!-- Spinner weekday-->
+    <string-array name="weekday_array">
+        <item></item>
+        <item>poniedziałek</item>
+        <item>wtorek</item>
+        <item>środa</item>
+        <item>czwartek</item>
+        <item>piątek</item>
+        <item>sobota</item>
+        <item>niedziela</item>
+    </string-array>
+
+    <!-- Spinner repeat-->
+    <string-array name="repeat_array">
+        <item></item>
+        <item>tak</item>
+        <item>nie</item>
+    </string-array>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Literature-->
+    <string name="menu_literature">Literatura</string>
+
+    <string name="literature_item1">Literatura 1</string>
+    <string name="literature_item2">Literatura 2</string>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <string name="edit">Edytuj</string>
+    <string name="delete">Usuń</string>
+    <string name="add_reminder">Dodaj przypomnienie</string>
+
+    <string name="measurement">Pomiar: </string>
+    <string name="unit">j.m.</string>
+    <string name="add_new_measure">Dodaj nowy pomiar</string>
+
     <string name="add_button_text">Dodaj</string>
+    <string name="no_data">Brak danych do wyświetlenia</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -1,19 +1,20 @@
 package edu.pg.DiA.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import edu.pg.DiA.MainActivity;
 import edu.pg.DiA.R;
-import edu.pg.DiA.SecondActivity;
+import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.ProfileListViewHolder;
 import edu.pg.DiA.models.User;
 
@@ -46,6 +47,9 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHold
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ProfileListViewHolder holder, int position) {
+
+        SharedPreferences sharedPref = ((Activity)context).getSharedPreferences(((Activity)context).getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.userId.setText(changeProfiles.get(position).uId);
@@ -54,9 +58,18 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHold
         holder.profileListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SecondActivity.class);
-                intent.putExtra("firstName", String.valueOf(changeProfiles.get(position).firstName));
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt(((Activity)context).getString(R.string.preference_file_key), changeProfiles.get(position).uId);
+                editor.apply();
+
+                User user = AppDatabase.getInstance(context).userDao().getUser(changeProfiles.get(position).uId);
+                User.setUser(user);
+
+                Intent intent = new Intent(context, MainActivity.class);
+               // intent.putExtra("firstName", String.valueOf(changeProfiles.get(position).firstName));
                 context.startActivity(intent);
+                ((Activity)context).finish();
             }
         });
     }

@@ -13,6 +13,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.io.File;
 import java.util.List;
 
+import edu.pg.DiA.database.dao.BodyWeightMeasurementDao;
+import edu.pg.DiA.database.dao.GlucoseMeasurementDao;
+import edu.pg.DiA.database.dao.MedicineDao;
+import edu.pg.DiA.database.dao.MedicineReminderDao;
+import edu.pg.DiA.database.dao.ReminderDao;
+import edu.pg.DiA.database.dao.UnitDao;
 import edu.pg.DiA.database.dao.UserDao;
 
 //models
@@ -45,7 +51,7 @@ import edu.pg.DiA.models.User;
         Reminder.class,
         Unit.class
     },
-    version = 2)
+    version = 5)
 
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -74,4 +80,10 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract UserDao userDao();
+    public abstract MedicineDao medicineDao();
+    public abstract UnitDao unitDao();
+    public abstract GlucoseMeasurementDao glucoseMeasurementDao();
+    public abstract BodyWeightMeasurementDao bodyWeightMeasurementDao();
+    public abstract ReminderDao reminderDao();
+    public abstract MedicineReminderDao medicineReminderDao();
 }

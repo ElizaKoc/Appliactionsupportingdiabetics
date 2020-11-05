@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_load_profiles">
+    tools:showIn="@layout/app_bar_load_profiles">
 
     <FrameLayout
         android:id="@+id/profile_list_fragment"

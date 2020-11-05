@@ -2,12 +2,17 @@ package edu.pg.DiA.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import edu.pg.DiA.database.AppDatabase;
 
 @Entity(tableName = "user")
 public class User {
+
+    @Ignore
+    private static User user;
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int uId;
@@ -27,11 +32,22 @@ public class User {
     @ColumnInfo(name = "sex")
     public String sex;
 
-    public User(String firstName, String lastName, int birth_year, int height_cm, String sex) {
+
+
+    public User(int uId, String firstName, String lastName, int birth_year, int height_cm, String sex) {
+        this.uId = uId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birth_year = birth_year;
         this.height_cm = height_cm;
         this.sex = sex;
+    }
+
+    public static User getCurrentUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        User.user = user;
     }
 }

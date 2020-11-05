@@ -11,10 +11,10 @@
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/nav_medicines"
+        android:id="@+id/nav_medicine_list"
         android:name="edu.pg.DiA.ui.medicines.MedicinesFragment"
         android:label="@string/menu_medicines"
-        tools:layout="@layout/fragment_medicines" />
+        tools:layout="@layout/fragment_medicine_list" />
     <fragment
         android:id="@+id/nav_diet"
         android:name="edu.pg.DiA.ui.diet.DietFragment"
@@ -24,12 +24,12 @@
         android:id="@+id/nav_glucose_measurements"
         android:name="edu.pg.DiA.ui.glucose_measurements.GlucoseMeasurementsFragment"
         android:label="@string/menu_glucose_measurements"
-        tools:layout="@layout/fragment_glucose_measurements" />
+        tools:layout="@layout/fragment_glucose_measurements_list" />
     <fragment
         android:id="@+id/nav_weight_measurements"
         android:name="edu.pg.DiA.ui.weight_measurements.WeightMeasurementsFragment"
         android:label="@string/menu_weight_measurements"
-        tools:layout="@layout/fragment_weight_measurements" />
+        tools:layout="@layout/fragment_weight_measurements_list" />
     <fragment
         android:id="@+id/nav_help"
         android:name="edu.pg.DiA.ui.help.HelpFragment"
@@ -65,4 +65,9 @@
         android:name="edu.pg.DiA.ui.add_new_profile.AddNewProfileFragment"
         android:label="@string/menu_add_new_profile"
         tools:layout="@layout/fragment_add_new_profile"/>
+    <fragment
+        android:id="@+id/nav_add_new_medicine"
+        android:name="edu.pg.DiA.ui.medicines.AddNewMedicineFragment"
+        android:label="fragment_add_new_medicine"
+        tools:layout="@layout/fragment_add_new_medicine" />
 </navigation>

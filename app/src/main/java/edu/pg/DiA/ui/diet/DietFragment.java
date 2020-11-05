@@ -8,21 +8,32 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.ui.profile.ProfileViewModel;
 
 public class DietFragment extends Fragment{
 
     private DietViewModel dietViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        dietViewModel =
-                ViewModelProviders.of(this).get(DietViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_diet, container, false);
+        updateData(root);
+        return root;
+    }
+
+    private void updateData(View root) {
+
+        ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+
+        dietViewModel = ViewModelProviders.of(this).get(DietViewModel.class);
+
         final TextView textView = root.findViewById(R.id.text_diet);
         dietViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -30,6 +41,13 @@ public class DietFragment extends Fragment{
                 textView.setText(s);
             }
         });
-        return root;
+
+        dietViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer i) {
+                //ab.setDisplayHomeAsUpEnabled(false);
+                ab.setTitle(i);
+            }
+        });
     }
 }

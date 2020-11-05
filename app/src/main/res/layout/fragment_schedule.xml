@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="edu.pg.DiA.ui.schedule.ScheduleFragment">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/text_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,5 +20,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center|center_horizontal"
+        android:text="@string/set_date"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CalendarView
+        android:id="@+id/calendar_view"
+        android:dateTextAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:layout_width="348dp"
+        android:layout_height="338dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

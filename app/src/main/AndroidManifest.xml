@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SecondActivity"
-            android:label="@string/title_activity_load_profiles"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".LoadProfilesActivity"/>
-        <activity
             android:name=".LoadProfilesActivity"
             android:label="@string/title_activity_load_profiles"
             android:theme="@style/AppTheme.NoActionBar"/>

@@ -1,6 +1,9 @@
 package edu.pg.DiA;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +40,9 @@ public class LoadProfilesActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Context context = getApplicationContext();
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         setContentView(R.layout.activity_load_profiles);
         Toolbar toolbar = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
@@ -96,6 +102,9 @@ public class LoadProfilesActivity extends AppCompatActivity{
             getSupportFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            this.finish();
         }
     }
 }
