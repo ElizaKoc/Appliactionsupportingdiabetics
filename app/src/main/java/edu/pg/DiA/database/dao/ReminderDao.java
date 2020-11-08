@@ -18,7 +18,10 @@ public interface ReminderDao {
     LiveData<List<Reminder>> getAll();
 
     @Query("SELECT id FROM reminder  ORDER BY id DESC LIMIT 1")
-    LiveData<Integer> getLatesReminderId();
+    Integer getLatesReminderId();
+
+    @Query("SELECT user_id FROM reminder  WHERE id = :rId")
+    int getUserId(int rId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Reminder> reminders);

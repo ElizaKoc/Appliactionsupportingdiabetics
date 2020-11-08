@@ -5,23 +5,20 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.database.dao.BodyWeightMeasurementDao;
-import edu.pg.DiA.database.dao.GlucoseMeasurementDao;
-import edu.pg.DiA.models.Body_weight_measurement;
-import edu.pg.DiA.models.Glucose_measurement;
+import edu.pg.DiA.models.BodyWeightMeasurement;
 import edu.pg.DiA.models.User;
 
 public class WeightMeasurementsViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Integer> mText;
     private final MutableLiveData<Integer> title;
-    public LiveData<List<Body_weight_measurement>> measurements;
+    public LiveData<List<BodyWeightMeasurement>> measurements;
     public BodyWeightMeasurementDao bodyWeightMeasurementDao;
 
     public WeightMeasurementsViewModel(Application application) {

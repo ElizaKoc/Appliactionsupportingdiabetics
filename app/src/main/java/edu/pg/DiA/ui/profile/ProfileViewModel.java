@@ -10,7 +10,6 @@ import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.database.dao.BodyWeightMeasurementDao;
 import edu.pg.DiA.database.dao.UserDao;
-import edu.pg.DiA.models.Body_weight_measurement;
 import edu.pg.DiA.models.User;
 
 public class ProfileViewModel extends AndroidViewModel {

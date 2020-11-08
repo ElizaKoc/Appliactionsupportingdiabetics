@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,7 +22,7 @@ import java.util.Date;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
-import edu.pg.DiA.models.Body_weight_measurement;
+import edu.pg.DiA.models.BodyWeightMeasurement;
 import edu.pg.DiA.models.User;
 
 public class AddNewWeightMeasurementFragment extends Fragment{
@@ -67,7 +66,7 @@ public class AddNewWeightMeasurementFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                Body_weight_measurement dataWeightMeasurement = getDataWeightMeasurement();
+                BodyWeightMeasurement dataWeightMeasurement = getDataWeightMeasurement();
                 long result = -1;
 
                 if(dataWeightMeasurement != null) {
@@ -89,7 +88,7 @@ public class AddNewWeightMeasurementFragment extends Fragment{
     }
 
     @NotNull
-    private Body_weight_measurement getDataWeightMeasurement() {
+    private BodyWeightMeasurement getDataWeightMeasurement() {
 
         Float measurementValue = ((measurementValueEdit).getText().toString().equals("")) ? 0 : Float.parseFloat((measurementValueEdit).getText().toString());
         int userId = User.getCurrentUser().uId;
@@ -98,7 +97,7 @@ public class AddNewWeightMeasurementFragment extends Fragment{
         if(measurementValue == 0 || userId == 0 ) {
             return null;
         }
-        return new Body_weight_measurement(0, userId, measurementValue, date);
+        return new BodyWeightMeasurement(0, userId, measurementValue, date);
     }
 
     private void clear() {

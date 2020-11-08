@@ -21,7 +21,16 @@ public class TimestampConverter {
     @TypeConverter
     public static String dateToTimestamp(Date date) {
 
-        String strDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
-        return date == null ? null : strDate;
+        String strDate;
+
+        if(date != null) {
+            if(date.getTime() != 0) {
+                strDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+            } else {
+                strDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+            }
+            return date == null ? null : strDate;
+        }
+        return null;
     }
 }

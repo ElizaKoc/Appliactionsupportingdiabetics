@@ -21,6 +21,8 @@ public interface MedicineDao {
     @Query("SELECT * FROM medicine WHERE id = :mId")
     LiveData<Medicine> getMedicine(int mId);
 
+    @Query("SELECT id FROM medicine WHERE user_id = :uId AND name = :name")
+    int getMedicineId(int uId, String name);
 
     @Query("SELECT name FROM medicine WHERE id = :mId")
     String getName(int mId);
@@ -31,14 +33,14 @@ public interface MedicineDao {
     @Query("SELECT name FROM medicine WHERE user_id = :userId")
     List<String> getAllNames(int userId);
 
-    @Query("SELECT unit_id FROM medicine WHERE name = :name")
-    int getUnitId(String name);
+    @Query("SELECT unit_id FROM medicine WHERE id = :id")
+    int getUnitId(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Medicine>medicines);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Medicine medicine);
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    long insert(Medicine medicine)throws Exception;
 
     @Delete
     void delete(Medicine medicine);

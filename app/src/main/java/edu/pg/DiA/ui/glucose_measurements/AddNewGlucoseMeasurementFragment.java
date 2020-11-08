@@ -1,15 +1,11 @@
 package edu.pg.DiA.ui.glucose_measurements;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,13 +22,14 @@ import java.util.Date;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
-import edu.pg.DiA.models.Glucose_measurement;
+import edu.pg.DiA.models.GlucoseMeasurement;
 import edu.pg.DiA.models.User;
 
 public class AddNewGlucoseMeasurementFragment extends Fragment{
 
     private AddNewGlucoseMeasurementViewModel addNewGlucoseMeasurementViewModel;
     private AppDatabase db;
+    private int reminderId;
 
     public EditText measurementValueEdit;
 
@@ -47,6 +44,11 @@ public class AddNewGlucoseMeasurementFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        if(getArguments() != null) {
+            reminderId = getArguments().getInt("reminder_id", 0);
+        } else {
+            reminderId = 0;
+        }
     }
 
     private void initView(View root) {
@@ -70,7 +72,7 @@ public class AddNewGlucoseMeasurementFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                Glucose_measurement dataGlucoseMeasurement = getDataGlucoseMeasurement();
+                GlucoseMeasurement dataGlucoseMeasurement = getDataGlucoseMeasurement();
                 long result = -1;
 
                 if(dataGlucoseMeasurement != null) {
@@ -98,17 +100,21 @@ public class AddNewGlucoseMeasurementFragment extends Fragment{
     }
 
     @NotNull
-    private Glucose_measurement getDataGlucoseMeasurement() {
+    private GlucoseMeasurement getDataGlucoseMeasurement() {
 
         Float measurementValue = ((measurementValueEdit).getText().toString().equals("")) ? 0 : Float.parseFloat((measurementValueEdit).getText().toString());
         int userId = User.getCurrentUser().uId;
         Date date = new Date(new Date().getTime());
-        //int reminderId = db.unitDao().getUnitId((unitEdit).getSelectedItem().toString());
 
         if(measurementValue == 0 || userId == 0 ) {
             return null;
         }
-        return new Glucose_measurement(0, null, userId, measurementValue, date);
+
+        if(reminderId != 0)  {
+            return new GlucoseMeasurement(0, reminderId, userId, measurementValue, date);
+        } else {
+            return new GlucoseMeasurement(0, null, userId, measurementValue, date);
+        }
     }
 
     private void clear() {

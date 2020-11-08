@@ -5,7 +5,7 @@ import androidx.room.Relation;
 
 public class MedicineReminderWithMedicineAndReminder {
     @Embedded
-    public Medicine_reminder medicine_reminder;
+    public MedicineReminder medicine_reminder;
 
     @Relation(
             parentColumn = "reminder_id",

@@ -10,13 +10,14 @@ import edu.pg.DiA.R;
 
 public class WeightMeasurementsListViewHolder extends RecyclerView.ViewHolder{
 
-    public TextView measurement, date;
+    public TextView measurement, date, buttonViewOption;
     public ConstraintLayout weightMeasurementListItem;
 
     public WeightMeasurementsListViewHolder(View v) {
         super(v);
         measurement = v.findViewById(R.id.weight_measurement_txt);
         date = v.findViewById(R.id.weight_measurement_date_txt);
+        buttonViewOption = v.findViewById(R.id.weight_ms_list_options);
         weightMeasurementListItem = v.findViewById(R.id.weight_measurement_list_item);
     }
 }

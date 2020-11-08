@@ -52,8 +52,7 @@ public class MedicineFragment extends Fragment implements EventListener {
 
     private void initData() {
 
-        medicineId = getArguments().getInt("medicineId", 0);
-
+        medicineId = getArguments().getInt("medicine_id", 0);
         medicineViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication(), medicineId)).get(MedicineViewModel.class);
         medicineViewModel.medicineReminders.observe(this, changeMedicineReminders -> {
             medicineReminders = changeMedicineReminders;
@@ -65,8 +64,8 @@ public class MedicineFragment extends Fragment implements EventListener {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
 
-        medicineId = getArguments().getInt("medicineId", 0);
-        medicineViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication(), medicineId)).get(MedicineViewModel.class);
+        //medicineId = getArguments().getInt("medicineId", 0);
+        //medicineViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication(), medicineId)).get(MedicineViewModel.class);
         //medicineViewModel = ViewModelProviders.of(this).get(MedicineViewModel.class);
         medicineViewModel.medicineReminders.observe(getViewLifecycleOwner(), new Observer<List<MedicineReminderWithMedicineAndReminder>>() {
 
@@ -90,7 +89,7 @@ public class MedicineFragment extends Fragment implements EventListener {
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
-        medicineId = getArguments().getInt("medicineId", 0);
+        medicineId = getArguments().getInt("medicine_id", 0);
         medicineViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication(), medicineId)).get(MedicineViewModel.class);
 
         CustomRecyclerView recyclerView = root.findViewById(R.id.medicine_list_reminder);

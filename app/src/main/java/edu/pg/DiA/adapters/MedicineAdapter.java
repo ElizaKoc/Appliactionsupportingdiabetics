@@ -55,8 +55,17 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder>{
         // - replace the contents of the view with that element
         holder.dose.setText(changeMedicineReminders.get(position).medicine_reminder.doseUnits);
 
-        String strDate = new SimpleDateFormat("yyyy-MM-dd").format(changeMedicineReminders.get(position).reminder.date);
+        String strDate;
+
+        if(changeMedicineReminders.get(position).reminder.date != null) {
+            strDate = new SimpleDateFormat("yyyy-MM-dd").format(changeMedicineReminders.get(position).reminder.date);
+        } else {
+            strDate = changeMedicineReminders.get(position).reminder.weekday;
+        }
         holder.date.setText(strDate);
+
+        String unitName = AppDatabase.getInstance(context).unitDao().getName(changeMedicineReminders.get(position).medicine.unitId);
+        holder.unit.setText(unitName);
 
         holder.time.setText(changeMedicineReminders.get(position).reminder.time);
         holder.medicineReminderListItem.setOnClickListener(new View.OnClickListener() {

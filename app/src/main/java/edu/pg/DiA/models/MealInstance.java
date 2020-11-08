@@ -23,7 +23,7 @@ import edu.pg.DiA.helpers.TimestampConverter;
         indices = {@Index("meal_id")}
 )
 
-public class Meal_instance {
+public class MealInstance {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -36,7 +36,7 @@ public class Meal_instance {
     @TypeConverters({TimestampConverter.class})
     public Date date;
 
-    public Meal_instance(int mlId, Date date) {
+    public MealInstance(int mlId, Date date) {
         this.mlId = mlId;
         this.date = date;
     }

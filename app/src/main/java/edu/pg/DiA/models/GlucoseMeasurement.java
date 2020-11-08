@@ -31,7 +31,7 @@ import edu.pg.DiA.helpers.TimestampConverter;
         indices = {@Index("user_id"), @Index("reminder_id")}
     )
 
-public class Glucose_measurement {
+public class GlucoseMeasurement {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int gmId;
@@ -49,7 +49,7 @@ public class Glucose_measurement {
     @TypeConverters({TimestampConverter.class})
     public Date date;
 
-    public Glucose_measurement(int gmId, @Nullable Integer reminderId, int userId, float dose, Date date) {
+    public GlucoseMeasurement(int gmId, @Nullable Integer reminderId, int userId, float dose, Date date) {
         this.gmId = gmId;
         this.reminderId = reminderId;
         this.userId = userId;

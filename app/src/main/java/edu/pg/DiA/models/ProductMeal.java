@@ -24,7 +24,7 @@ import androidx.room.Index;
         indices = {@Index("product_id"), @Index("meal_id")}
 )
 
-public class Product_meal {
+public class ProductMeal {
 
     @ColumnInfo(name = "product_id")
     public int pId;
@@ -35,7 +35,7 @@ public class Product_meal {
     @ColumnInfo(name = "unit_quantity")
     public float unitQuantity;
 
-    public Product_meal(int pId, int mlId, float unitQuantity) {
+    public ProductMeal(int pId, int mlId, float unitQuantity) {
         this.pId = pId;
         this.mlId = mlId;
         this.unitQuantity = unitQuantity;

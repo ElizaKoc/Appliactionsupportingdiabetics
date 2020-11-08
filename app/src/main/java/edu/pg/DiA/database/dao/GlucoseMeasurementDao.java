@@ -9,25 +9,25 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import edu.pg.DiA.models.Glucose_measurement;
+import edu.pg.DiA.models.GlucoseMeasurement;
 
 @Dao
 public interface GlucoseMeasurementDao {
 
     @Query("SELECT * FROM glucose_measurement WHERE user_id = :userId")
-    LiveData<List<Glucose_measurement>> getAllMeasurements(int userId);
+    LiveData<List<GlucoseMeasurement>> getAllMeasurements(int userId);
 
     @Query("SELECT date FROM glucose_measurement WHERE user_id = :gmId")
     String getDate(int gmId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Glucose_measurement>measurements);
+    void insertAll(List<GlucoseMeasurement>measurements);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Glucose_measurement measurement);
+    long insert(GlucoseMeasurement measurement);
 
     @Delete
-    void delete(Glucose_measurement measurement);
+    void delete(GlucoseMeasurement measurement);
 
     @Query("DELETE FROM glucose_measurement")
     void deleteAll();

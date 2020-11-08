@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.medicines.MedicineFragment" >
+    tools:context=".ui.medicines.MedicineFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,10 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:text="@string/medicine_description_label"
             android:textColor="@color/black"
-            android:text="@string/medicine_description_label" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/medicine_description_txt"
@@ -27,6 +27,7 @@
             android:layout_height="203dp"
             android:layout_gravity="fill|fill_horizontal"
             android:layout_margin="5dp"
+            android:background="@drawable/customborder"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -35,30 +36,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:text="@string/medicine_reminder_list_label"
             android:textColor="@color/black"
-            android:text="@string/medicine_reminder_list_label" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <FrameLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/customborder">
 
-            <edu.pg.DiA.widgets.CustomRecyclerView
-                android:id="@+id/medicine_list_reminder"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_list_medicine_reminder" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
 
-            <include
-                android:id="@+id/empty_drops_medicine_reminder"
-                layout="@layout/empty_drops_medicine_reminder" />
+                <edu.pg.DiA.widgets.CustomRecyclerView
+                    android:id="@+id/medicine_list_reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|fill"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_list_medicine_reminder" />
 
-        </FrameLayout>
+                <include
+                    android:id="@+id/empty_drops_medicine_reminder"
+                    layout="@layout/empty_drops_medicine_reminder" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

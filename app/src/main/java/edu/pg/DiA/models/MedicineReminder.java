@@ -25,7 +25,7 @@ import androidx.room.PrimaryKey;
         indices = {@Index("medicine_id"), @Index("reminder_id")}
     )
 
-public class Medicine_reminder {
+public class MedicineReminder {
 
     @ColumnInfo(name = "medicine_id")
     public int medicineId;
@@ -36,7 +36,7 @@ public class Medicine_reminder {
     @ColumnInfo(name = "dose_units")
     public String doseUnits;
 
-    public Medicine_reminder(int medicineId, int reminderId, String doseUnits) {
+    public MedicineReminder(int medicineId, int reminderId, String doseUnits) {
         this.medicineId = medicineId;
         this.reminderId = reminderId;
         this.doseUnits = doseUnits;

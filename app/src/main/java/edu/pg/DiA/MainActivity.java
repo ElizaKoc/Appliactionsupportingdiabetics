@@ -19,9 +19,11 @@ import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.models.User;
 import edu.pg.DiA.ui.diet.DietFragment;
+import edu.pg.DiA.ui.glucose_measurements.AddNewGlucoseMeasurementFragment;
 import edu.pg.DiA.ui.glucose_measurements.GlucoseMeasurementsFragment;
 import edu.pg.DiA.ui.help.HelpFragment;
 import edu.pg.DiA.ui.journal.JournalFragment;
+import edu.pg.DiA.ui.medicines.MedicineFragment;
 import edu.pg.DiA.ui.medicines.MedicinesFragment;
 import edu.pg.DiA.ui.profile.ProfileFragment;
 import edu.pg.DiA.ui.profile_list.ProfileListFragment;
@@ -48,12 +50,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     public AppDatabase db;
-    protected AppBarConfiguration mAppBarConfiguration;
-    protected TextView navFirstName;
+    private AppBarConfiguration mAppBarConfiguration;
     private  Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawer;
@@ -66,11 +68,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         db = AppDatabase.getInstance(getApplicationContext());
 
+
+        int reminderId = getIntent().getIntExtra("reminder_id", 0);
+        String alarmType = getIntent().getStringExtra("alarm_type");
+
         Context context = getApplicationContext();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         int userId = sharedPref.getInt(getString(R.string.preference_file_key), 0);
+
+        if(reminderId != 0) {
+            int newUserId = db.reminderDao().getUserId(reminderId);
+
+            if(userId != newUserId) {
+                userId = newUserId;
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt((context.getString(R.string.preference_file_key)), userId);
+                editor.apply();
+            }
+        }
 
         if(userId != 0) {
             User user = db.userDao().getUser(userId);
@@ -78,11 +96,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
             drawer = findViewById(R.id.drawer_layout);
             drawerToggle = setupDrawerToggle();
-            // Setup toggle to display hamburger icon with nice animation
+            // Setup toggle to display hamburger icon with animation
             drawerToggle.setDrawerIndicatorEnabled(true);
             drawerToggle.syncState();
             drawer.addDrawerListener(drawerToggle);
@@ -103,11 +121,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //NavigationUI.setupWithNavController(navigationView, navController);
 
             View hView =  navigationView.getHeaderView(0);
-            navFirstName = (TextView)hView.findViewById(R.id.nav_first_name);
+            TextView navFirstName = (TextView) hView.findViewById(R.id.nav_first_name);
             navFirstName.setText(User.getCurrentUser().firstName);
 
             fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+            //fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+
+            if(alarmType != null) {
+
+                Bundle args = new Bundle();
+
+                if (alarmType.equals("pomiar glukozy")) {
+
+                    args.putInt("reminder_id", reminderId);
+                    AddNewGlucoseMeasurementFragment addNewGlucoseMeasurementFragment = new AddNewGlucoseMeasurementFragment();
+                    addNewGlucoseMeasurementFragment.setArguments(args);
+                    fragmentManager.beginTransaction().replace(R.id.change_list_fragment, addNewGlucoseMeasurementFragment).commit();
+                }
+                else if(alarmType.equals("lekarstwo")) {
+
+                    int medicineId = db.medicineReminderDao().getMedicineId(reminderId);
+                    args.putInt("medicine_id", medicineId);
+                    MedicineFragment medicineFragment = new MedicineFragment();
+                    medicineFragment.setArguments(args);
+                    fragmentManager.beginTransaction().replace(R.id.change_list_fragment, medicineFragment).commit();
+                }
+                else {
+                    fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+                }
+            }
+            else {
+                fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+            }
+
         } else {
 
             Intent intent = new Intent(MainActivity.this, LoadProfilesActivity.class);
@@ -162,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -195,16 +241,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
-
-            case R.id.action_settings: {
-                Intent intent = new Intent(this, LoadProfilesActivity.class);
-                startActivity(intent);
-                this.finish();
-                break;
-            }
-        }
         //close navigation drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -306,8 +342,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
-        // and will not render the hamburger icon without it.
+
         return new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 }

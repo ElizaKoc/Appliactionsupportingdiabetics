@@ -2,28 +2,26 @@ package edu.pg.DiA.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.pg.DiA.R;
-import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.GlucoseMeasurementsListViewHolder;
-import edu.pg.DiA.holders.MedicineListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
-import edu.pg.DiA.models.Glucose_measurement;
-import edu.pg.DiA.models.Medicine;
+import edu.pg.DiA.models.GlucoseMeasurement;
 
 public class GlucoseMeasurementsListAdapter extends RecyclerView.Adapter<GlucoseMeasurementsListViewHolder>{
 
     private Context context;
-    private List<Glucose_measurement> changeGlucoseMeasurements = null;
+    private List<GlucoseMeasurement> changeGlucoseMeasurements = null;
     private EventListener listener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -32,7 +30,7 @@ public class GlucoseMeasurementsListAdapter extends RecyclerView.Adapter<Glucose
         this.listener = listener;
     }
 
-    public void setMeasurements(List<Glucose_measurement> changeMeasurements) {
+    public void setMeasurements(List<GlucoseMeasurement> changeMeasurements) {
         this.changeGlucoseMeasurements = changeMeasurements;
         notifyDataSetChanged();
     }
@@ -57,6 +55,31 @@ public class GlucoseMeasurementsListAdapter extends RecyclerView.Adapter<Glucose
 
         String strDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(changeGlucoseMeasurements.get(position).date);
         holder.date.setText(strDate);
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context, v);
+                popup.inflate(R.menu.glucose_measurement_menu_item);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int id = item.getItemId();
+                        if (id == R.id.glucose_measurement_delete) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                popup.show();
+            }
+        });
+
 
         holder.glucoseMeasurementListItem.setOnClickListener(new View.OnClickListener() {
             @Override

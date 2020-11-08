@@ -146,7 +146,7 @@ public class MedicinesFragment extends Fragment implements EventListener {
                 Toast.LENGTH_SHORT).show();
 
         Bundle args = new Bundle();
-        args.putInt("medicineId", medicineListAdapter.getMedicine().mId);
+        args.putInt("medicine_id", medicineListAdapter.getMedicine().mId);
         fragment.setArguments(args);
 
 

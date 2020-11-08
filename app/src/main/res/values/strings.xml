@@ -107,7 +107,7 @@
     <string name="spinner_repeat_label">Czy cyklicznie?</string>
 
     <string name="reminder_medicine_dose">Podaj dawkę</string>
-    <string name="reminder_date">Podaj datę przypomnienia</string>
+    <string name="reminder_date">Podaj datę przypomnienia (yyyy-mm-dd)</string>
     <string name="reminder_time">Podaj godzinę przypomnienia</string>
     <string name="reminder_alarm_type">Podaj typ przypomnienia</string>
     <string name="reminder_weekday">Podaj dzień tygodnia</string>
@@ -151,6 +151,7 @@
     <string name="edit">Edytuj</string>
     <string name="delete">Usuń</string>
     <string name="add_reminder">Dodaj przypomnienie</string>
+    <string name="reminders_list">Zobacz listę przypomnień</string>
 
     <string name="measurement">Pomiar: </string>
     <string name="unit">j.m.</string>

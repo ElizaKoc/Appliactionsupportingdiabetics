@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey;
             onDelete = ForeignKey.CASCADE
         )
     },
-    indices = {@Index("user_id"), @Index("unit_id")}
+    indices = {@Index("user_id"), @Index("unit_id"), @Index(value = {"user_id", "name"}, unique = true)}
 )
 
 public class Medicine {

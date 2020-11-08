@@ -9,9 +9,8 @@ import androidx.room.Transaction;
 
 import java.util.List;
 
-import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
-import edu.pg.DiA.models.Medicine_reminder;
+import edu.pg.DiA.models.MedicineReminder;
 
 @Dao
 public interface MedicineReminderDao {
@@ -20,6 +19,9 @@ public interface MedicineReminderDao {
     @Query("SELECT * FROM medicine_reminder WHERE medicine_id = :mId")
     LiveData<List<MedicineReminderWithMedicineAndReminder>> getAll(int mId);
 
+    @Query("SELECT medicine_id FROM medicine_reminder WHERE reminder_id = :rId")
+    int getMedicineId(int rId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Medicine_reminder medicine_reminder);
+    long insert(MedicineReminder medicine_reminder);
 }

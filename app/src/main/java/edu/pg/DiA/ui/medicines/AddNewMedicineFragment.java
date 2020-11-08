@@ -102,26 +102,32 @@ public class AddNewMedicineFragment extends Fragment implements AdapterView.OnIt
                 Medicine dataMedicine = getDataMedicine();
                 long result = -1;
 
-                if(dataMedicine != null) {
-                    result = AppDatabase.getInstance(getContext()).medicineDao().insert(dataMedicine);
-                }
+                try {
+                    if (dataMedicine != null) {
+                        result = AppDatabase.getInstance(getContext()).medicineDao().insert(dataMedicine);
+                    }
 
-                if(result == -1) {
-                    Toast.makeText(getContext(), "Nie udało się dodać leku",
+                    if(result == -1) {
+                        Toast.makeText(getContext(), "Nie udało się dodać leku",
+                                Toast.LENGTH_SHORT).show();
+
+                    } else {
+                           /*Fragment profileListFragment = new ProfileListFragment();
+                           FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                           transaction.replace(R.id.profile_list_fragment, profileListFragment);
+                           transaction.commit();*/
+
+                        clear();
+
+                        Toast.makeText(getContext(), "Dodano lek",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch(Exception e){
+
+                    Toast.makeText(getContext(), "Lek już istnieje!",
                             Toast.LENGTH_SHORT).show();
-
-                } else {
-                   /*Fragment profileListFragment = new ProfileListFragment();
-                   FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                   transaction.replace(R.id.profile_list_fragment, profileListFragment);
-                   transaction.commit();*/
-
-                    clear();
-
-                    Toast.makeText(getContext(), "Dodano lek",
-                            Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

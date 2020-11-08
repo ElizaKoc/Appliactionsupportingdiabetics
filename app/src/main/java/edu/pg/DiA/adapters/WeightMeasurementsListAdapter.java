@@ -2,8 +2,10 @@ package edu.pg.DiA.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,16 +14,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.pg.DiA.R;
-import edu.pg.DiA.holders.GlucoseMeasurementsListViewHolder;
 import edu.pg.DiA.holders.WeightMeasurementsListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
-import edu.pg.DiA.models.Body_weight_measurement;
-import edu.pg.DiA.models.Glucose_measurement;
+import edu.pg.DiA.models.BodyWeightMeasurement;
 
 public class WeightMeasurementsListAdapter extends RecyclerView.Adapter<WeightMeasurementsListViewHolder>{
 
     private Context context;
-    private List<Body_weight_measurement> changeWeightMeasurements = null;
+    private List<BodyWeightMeasurement> changeWeightMeasurements = null;
     private EventListener listener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -30,7 +30,7 @@ public class WeightMeasurementsListAdapter extends RecyclerView.Adapter<WeightMe
         this.listener = listener;
     }
 
-    public void setMeasurements(List<Body_weight_measurement> changeMeasurements) {
+    public void setMeasurements(List<BodyWeightMeasurement> changeMeasurements) {
         this.changeWeightMeasurements = changeMeasurements;
         notifyDataSetChanged();
     }
@@ -55,6 +55,30 @@ public class WeightMeasurementsListAdapter extends RecyclerView.Adapter<WeightMe
 
         String strDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(changeWeightMeasurements.get(position).date);
         holder.date.setText(strDate);
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context, v);
+                popup.inflate(R.menu.weight_measurement_menu_item);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int id = item.getItemId();
+                        if (id == R.id.weight_measurement_delete) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                popup.show();
+            }
+        });
 
         holder.weightMeasurementListItem.setOnClickListener(new View.OnClickListener() {
             @Override

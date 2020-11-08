@@ -22,6 +22,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE id = :userId")
     LiveData<User> getUserLive(int userId);
 
+    @Query("SELECT first_name FROM user WHERE id = :userId")
+    String getUserName(int userId);
+
     /*@Query("SELECT * FROM user WHERE id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 

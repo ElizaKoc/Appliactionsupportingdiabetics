@@ -26,7 +26,7 @@ import java.util.List;
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.WeightMeasurementsListAdapter;
 import edu.pg.DiA.interfaces.EventListener;
-import edu.pg.DiA.models.Body_weight_measurement;
+import edu.pg.DiA.models.BodyWeightMeasurement;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
 public class WeightMeasurementsFragment extends Fragment implements EventListener {
@@ -34,7 +34,7 @@ public class WeightMeasurementsFragment extends Fragment implements EventListene
     private WeightMeasurementsViewModel weightMeasurementsViewModel;
     private WeightMeasurementsListAdapter weightMeasurementsListAdapter;
     private FragmentManager fragmentManager;
-    public List<Body_weight_measurement> measurements;
+    public List<BodyWeightMeasurement> measurements;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -64,10 +64,10 @@ public class WeightMeasurementsFragment extends Fragment implements EventListene
 
         weightMeasurementsViewModel = ViewModelProviders.of(this).get(WeightMeasurementsViewModel.class);
 
-        weightMeasurementsViewModel.measurements.observe(getViewLifecycleOwner(), new Observer<List<Body_weight_measurement>>() {
+        weightMeasurementsViewModel.measurements.observe(getViewLifecycleOwner(), new Observer<List<BodyWeightMeasurement>>() {
 
             @Override
-            public void onChanged(@Nullable List<Body_weight_measurement> weightMeasurementsList) {
+            public void onChanged(@Nullable List<BodyWeightMeasurement> weightMeasurementsList) {
                 measurements = weightMeasurementsList;
                 weightMeasurementsListAdapter.setMeasurements(measurements);
             }

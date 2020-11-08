@@ -3,11 +3,12 @@ package edu.pg.DiA.ui.glucose_measurements;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,12 +28,9 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.GlucoseMeasurementsListAdapter;
-import edu.pg.DiA.adapters.MedicineListAdapter;
 import edu.pg.DiA.interfaces.EventListener;
-import edu.pg.DiA.models.Glucose_measurement;
-import edu.pg.DiA.models.Medicine;
-import edu.pg.DiA.ui.medicines.AddNewMedicineFragment;
-import edu.pg.DiA.ui.medicines.MedicinesViewModel;
+import edu.pg.DiA.models.GlucoseMeasurement;
+import edu.pg.DiA.ui.reminder.AddNewReminderFragment;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
 public class GlucoseMeasurementsFragment extends Fragment implements EventListener {
@@ -40,7 +38,7 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
     private GlucoseMeasurementsViewModel glucoseMeasurementsViewModel;
     private GlucoseMeasurementsListAdapter glucoseMeasurementsListAdapter;
     private FragmentManager fragmentManager;
-    public List<Glucose_measurement> measurements;
+    public List<GlucoseMeasurement> measurements;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,7 +54,30 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
         initData();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.glucose_measurement_menu_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        if (item.getItemId() == R.id.glucose_measurement_reminders_list) {
+            return true;
+        }
+        else if (item.getItemId() == R.id.glucose_ms_add_reminder) {
+            moveToAddReminderFragment();
+            return true;
+        }
+        return false;
+    }
+
     private void initData() {
+
+        setHasOptionsMenu(true);
+
         glucoseMeasurementsViewModel = ViewModelProviders.of(this).get(GlucoseMeasurementsViewModel.class);
         glucoseMeasurementsViewModel.measurements.observe(this, changeMeasurements -> {
             measurements = changeMeasurements;
@@ -70,10 +91,10 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
 
         glucoseMeasurementsViewModel = ViewModelProviders.of(this).get(GlucoseMeasurementsViewModel.class);
 
-        glucoseMeasurementsViewModel.measurements.observe(getViewLifecycleOwner(), new Observer<List<Glucose_measurement>>() {
+        glucoseMeasurementsViewModel.measurements.observe(getViewLifecycleOwner(), new Observer<List<GlucoseMeasurement>>() {
 
             @Override
-            public void onChanged(@Nullable List<Glucose_measurement> glucoseMeasurementsList) {
+            public void onChanged(@Nullable List<GlucoseMeasurement> glucoseMeasurementsList) {
                 measurements = glucoseMeasurementsList;
                 glucoseMeasurementsListAdapter.setMeasurements(measurements);
             }
@@ -136,7 +157,27 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
     }
 
     @Override
-    public void onEvent(Fragment fragment) {
+    public void onEvent(@Nullable Fragment fragment) {
 
+    }
+
+    private void moveToAddReminderFragment() {
+
+        // Create new fragment and transaction
+        Fragment addNewReminderFragment = new AddNewReminderFragment();
+
+        Bundle args = new Bundle();
+        args.putString("pomiar_glukozy", "pomiar glukozy");
+        addNewReminderFragment.setArguments(args);
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.change_list_fragment, addNewReminderFragment);
+        transaction.setReorderingAllowed(true).addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 }

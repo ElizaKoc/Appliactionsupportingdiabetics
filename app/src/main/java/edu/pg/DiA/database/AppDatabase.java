@@ -10,7 +10,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.io.File;
 import java.util.List;
 
 import edu.pg.DiA.database.dao.BodyWeightMeasurementDao;
@@ -22,36 +21,36 @@ import edu.pg.DiA.database.dao.UnitDao;
 import edu.pg.DiA.database.dao.UserDao;
 
 //models
-import edu.pg.DiA.models.Body_weight_measurement;
-import edu.pg.DiA.models.Glucose_measurement;
+import edu.pg.DiA.models.BodyWeightMeasurement;
+import edu.pg.DiA.models.GlucoseMeasurement;
 import edu.pg.DiA.models.Meal;
-import edu.pg.DiA.models.Meal_instance;
-import edu.pg.DiA.models.Meal_type;
+import edu.pg.DiA.models.MealInstance;
+import edu.pg.DiA.models.MealType;
 import edu.pg.DiA.models.Medicine;
-import edu.pg.DiA.models.Medicine_reminder;
+import edu.pg.DiA.models.MedicineReminder;
 import edu.pg.DiA.models.Note;
 import edu.pg.DiA.models.Product;
-import edu.pg.DiA.models.Product_meal;
+import edu.pg.DiA.models.ProductMeal;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.models.Unit;
 import edu.pg.DiA.models.User;
 
 @Database(entities = {
         User.class,
-        Body_weight_measurement.class,
-        Glucose_measurement.class,
+        BodyWeightMeasurement.class,
+        GlucoseMeasurement.class,
         Meal.class,
-        Meal_instance.class,
-        Meal_type.class,
+        MealInstance.class,
+        MealType.class,
         Medicine.class,
-        Medicine_reminder.class,
+        MedicineReminder.class,
         Note.class,
         Product.class,
-        Product_meal.class,
+        ProductMeal.class,
         Reminder.class,
         Unit.class
     },
-    version = 5)
+    version = 7)
 
 public abstract class AppDatabase extends RoomDatabase {
 

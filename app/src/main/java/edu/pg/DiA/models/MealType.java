@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "meal_type")
-public class Meal_type {
+public class MealType {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int mtId;
@@ -13,7 +13,7 @@ public class Meal_type {
     @ColumnInfo(name = "name")
     public String name;
 
-    public Meal_type(String name) {
+    public MealType(String name) {
         this.name = name;
     }
 }
