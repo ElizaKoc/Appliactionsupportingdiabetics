@@ -65,6 +65,7 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         if (item.getItemId() == R.id.glucose_measurement_reminders_list) {
+            moveToGlucoseMeasurementReminderListFragment();
             return true;
         }
         else if (item.getItemId() == R.id.glucose_ms_add_reminder) {
@@ -175,6 +176,21 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack
         transaction.replace(R.id.change_list_fragment, addNewReminderFragment);
+        transaction.setReorderingAllowed(true).addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
+    }
+
+    private void moveToGlucoseMeasurementReminderListFragment() {
+
+        // Create new fragment and transaction
+        Fragment glucoseMeasurementReminderListFragment = new GlucoseMeasurementReminderListFragment();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.change_list_fragment, glucoseMeasurementReminderListFragment);
         transaction.setReorderingAllowed(true).addToBackStack(null);
 
         // Commit the transaction

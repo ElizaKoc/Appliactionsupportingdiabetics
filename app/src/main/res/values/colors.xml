@@ -6,4 +6,11 @@
     <color name="colorDefault">#DD000000</color>
     <color name="black">#000000</color>
     <color name="light_gray">#5B6A6E</color>
+
+    <!-- Calendar -->
+    <color name="CalendarBackgroundColor">#BAA9E1</color>
+    <color name="CalendarCurrentDayBackgroundColor">#685C9F</color>
+    <color name="CalendarCurrentSelectedDayBackgroundColor">#261D51</color>
+    <color name="CalendarMultiEventIndicatorColor">#2F24C3</color>
+    <color name="CalendarTextColor">#fff</color>
 </resources>

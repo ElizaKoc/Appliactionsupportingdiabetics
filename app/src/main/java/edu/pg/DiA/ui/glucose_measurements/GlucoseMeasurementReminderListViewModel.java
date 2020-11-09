@@ -1,14 +1,11 @@
-package edu.pg.DiA.ui.schedule;
+package edu.pg.DiA.ui.glucose_measurements;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import edu.pg.DiA.R;
@@ -17,29 +14,28 @@ import edu.pg.DiA.database.dao.ReminderDao;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.models.User;
 
-public class ScheduleViewModel extends AndroidViewModel {
+public class GlucoseMeasurementReminderListViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<Integer> mText;
     private final MutableLiveData<Integer> title;
-    public LiveData<List<String>> reminderDates, reminderWeekdays;
+    public LiveData<List<Reminder>> measurementReminders;
     public ReminderDao reminderDao;
 
-    public ScheduleViewModel(Application application) {
+    public GlucoseMeasurementReminderListViewModel(Application application) {
 
         super(application);
 
         reminderDao = AppDatabase.getInstance(application.getApplicationContext()).reminderDao();
-        reminderDates = reminderDao.getAllUserReminderDates(User.getCurrentUser().uId);
-        reminderWeekdays = reminderDao.getAllUserReminderWeekdays(User.getCurrentUser().uId);
+        measurementReminders = reminderDao.getMeasurementReminders("pomiar glukozy", User.getCurrentUser().uId);
 
         mText = new MutableLiveData<>();
-        mText.setValue("This is schedule fragment");
+        mText.setValue(R.string.no_data);
 
         title = new MutableLiveData<>();
-        title.setValue(R.string.menu_schedule);
+        title.setValue(R.string.menu_reminder_list);
     }
 
-    public LiveData<String> getText() {
+    public LiveData<Integer> getText() {
         return mText;
     }
     public LiveData<Integer> getTitle() {

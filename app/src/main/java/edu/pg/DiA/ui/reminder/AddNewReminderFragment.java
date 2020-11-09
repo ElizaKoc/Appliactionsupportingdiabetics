@@ -216,32 +216,6 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         });
     }
 
-    /*public void sendOnChannelMedicineReminder(View v, int reminderId) {
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_baseline_local_pharmacy_24)
-                .setContentTitle("PRZYPOMNIENIE O LEKU")
-                .setContentText((medicineOptionEdit).getSelectedItem().toString()  + " dawka: " + (medicineDoseEdit).getText().toString())
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_REMINDER)
-                .build();
-
-        //notification.when
-
-        notificationManager.notify(reminderId, notification);
-    }
-
-    public void sendOnChannelGlucoseMeasurementReminder(View v, int reminderId) {
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_baseline_local_drink_24)
-                .setContentTitle("PRZYPOMNIENIE O POMIARZE GLUKOZY")
-                .setContentText((medicineOptionEdit).getSelectedItem().toString())
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_REMINDER)
-                .build();
-
-        notificationManager.notify(reminderId, notification);
-    }*/
-
     private void setAlarm() throws ParseException {
 
         String repeat = (repeatEdit).getSelectedItem().toString();

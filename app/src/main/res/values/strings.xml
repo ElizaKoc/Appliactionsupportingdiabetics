@@ -23,6 +23,7 @@
     <string name="menu_diet">Dieta</string>
     <string name="measurements">Pomiary</string>   <!--Measurements-->
     <string name="menu_glucose_measurements">Pomiary glukozy</string>  <!--Glucose Measurements-->
+    <string name="menu_reminder_list">Lista przypomnień</string>
     <string name="menu_weight_measurements">Pomiary masy ciała</string>    <!--Weight Measurements-->
     <string name="menu_journal">Dziennik</string>    <!--Journal-->
     <string name="menu_schedule">Harmonogram</string>  <!--Schedule-->
@@ -82,7 +83,9 @@
 
     <string name="glucose_measurement_unit">mg/dL</string>
     <string name="glucose_measurement_value_txt">Podaj zmierzoną wartość poziomu glukozy we krwi w mg/dL</string>
-    <string name="glucose_measurement_value">Podaj zmierzoną wartość (mg/dL)</string> weight_measurement_unit
+    <string name="glucose_measurement_value">Podaj zmierzoną wartość (mg/dL)</string>
+
+    <string name="glucose_measurement__reminder_label">pomiar glukozy</string>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Weight measurements list-->
@@ -95,6 +98,8 @@
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Schedule-->
     <string name="set_date">Wybierz datę</string>
+    <string name="calendar_preview_button_txt">Podgląd przypomnień</string>
+    <string name="calendar_add_reminder_button_txt">Dodaj przypomnienie</string>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Reminder-->
@@ -152,6 +157,7 @@
     <string name="delete">Usuń</string>
     <string name="add_reminder">Dodaj przypomnienie</string>
     <string name="reminders_list">Zobacz listę przypomnień</string>
+    <string name="reminder_label">Przypomnienie</string>
 
     <string name="measurement">Pomiar: </string>
     <string name="unit">j.m.</string>

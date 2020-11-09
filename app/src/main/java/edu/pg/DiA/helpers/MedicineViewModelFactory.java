@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.ui.medicines.MedicineViewModel;
 
-public class ViewModelFactory implements ViewModelProvider.Factory{
+public class MedicineViewModelFactory implements ViewModelProvider.Factory{
 
     private Application mApplication;
     private Integer mParam;
 
 
-    public ViewModelFactory(Application application, int param) {
+    public MedicineViewModelFactory(Application application, int param) {
         mApplication = application;
         mParam = param;
     }

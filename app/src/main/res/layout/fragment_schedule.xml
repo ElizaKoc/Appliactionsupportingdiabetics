@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mr_cast_meta_default_text_color"
     tools:context="edu.pg.DiA.ui.schedule.ScheduleFragment">
 
     <!--<TextView
@@ -26,18 +27,17 @@
         android:id="@+id/date_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginLeft="145dp"
         android:layout_marginTop="20dp"
         android:gravity="center|center_horizontal"
         android:text="@string/set_date"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/compact_calendar_view"
+        app:layout_constraintStart_toStartOf="@+id/compact_calendar_view"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CalendarView
+    <!--<CalendarView
         android:id="@+id/calendar_view"
         android:dateTextAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:layout_width="348dp"
@@ -45,6 +45,54 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_view" />-->
+
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        android:id="@+id/compact_calendar_view"
+        android:layout_width="348dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:compactCalendarBackgroundColor="@color/CalendarBackgroundColor"
+        app:compactCalendarCurrentDayBackgroundColor="@color/CalendarCurrentDayBackgroundColor"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/CalendarCurrentSelectedDayBackgroundColor"
+        app:compactCalendarMultiEventIndicatorColor="@color/CalendarMultiEventIndicatorColor"
+        app:compactCalendarTargetHeight="250dp"
+        app:compactCalendarTextColor="@color/CalendarTextColor"
+        app:compactCalendarTextSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_view" />
+
+    <Button
+        android:id="@+id/calendar_preview_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="20dp"
+        android:text="@string/calendar_preview_button_txt"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/compact_calendar_view"
+        app:layout_constraintStart_toStartOf="@+id/compact_calendar_view"
+        app:layout_constraintTop_toBottomOf="@+id/compact_calendar_view" />
+
+    <Button
+        android:id="@+id/calendar_add_reminder_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="20dp"
+        android:text="@string/calendar_add_reminder_button_txt"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/compact_calendar_view"
+        app:layout_constraintStart_toStartOf="@+id/compact_calendar_view"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_preview_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
