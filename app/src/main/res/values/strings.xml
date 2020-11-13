@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Appliaction supporting diabetics</string>
+    <string name="app_name">Diabetic Assistant</string>
     <string name="title_activity_load_profiles">LoadProfilesActivity</string>
     <string name="title_activity_second">UserProfile</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -10,7 +10,7 @@
     <string name="action_settings">Settings</string>
     <string name="preference_file_key">edu.pg.DiA.userId</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- MENU -->
     <!-- Profile list fragments -->
     <string name="menu_profile_list">Lista profili</string>
@@ -32,7 +32,7 @@
     <string name="menu_help">Pomoc</string>  <!--Help-->
     <string name="menu_change_profile">Zmień profil</string>    <!--Change profile-->
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Profile list-->
     <string name="add_new_profile">Dodaj nowy profil</string>
     <string name="first_name_label">Imię</string>
@@ -54,7 +54,7 @@
         <item>inna</item>
     </string-array>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Profile-->
     <string name="profile_name_label">Imię:</string>
     <string name="profile_surname_label">Nazwisko:</string>
@@ -65,7 +65,7 @@
     <string name="profile_weight_label">Waga:</string>
     <string name="profile_weight_unit">kg</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Medicine list-->
     <string name="add_new_medicine">Dodaj nowy lek</string>
 
@@ -84,7 +84,7 @@
     <string name="medicine_reminder_label">Przypomnienie</string>
     <string name="medicine_reminder_dose_label">Dawka:</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Glucose measurements list-->
     <string name="menu_add_new_glucose_measurement">Dodaj nowy pomiar glukozy</string>
 
@@ -94,7 +94,7 @@
 
     <string name="glucose_measurement__reminder_label">pomiar glukozy</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Weight measurements list-->
     <string name="menu_add_new_weight_measurement">Dodaj nowy pomiar masy ciała</string>
 
@@ -102,13 +102,13 @@
     <string name="weight_measurement_value_txt">Podaj zmierzoną masę ciała w kg</string>
     <string name="weight_measurement_value">Podaj zmierzoną wartość (kg)</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Schedule-->
     <string name="set_date">Wybierz datę</string>
     <string name="calendar_preview_button_txt">Podgląd przypomnień</string>
     <string name="calendar_add_reminder_button_txt">Dodaj przypomnienie</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Reminder-->
     <string name="menu_add_new_reminder">Dodaj nowe przypomnienie</string>
 
@@ -152,7 +152,7 @@
         <item>nie</item>
     </string-array>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Note list-->
     <string name="add_new_note">Dodaj nową notatkę</string>
 
@@ -166,14 +166,14 @@
     <string name="note_title_label">Tytuł</string>
     <string name="note_body_label">Treść</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Literature-->
     <string name="menu_literature">Literatura</string>
 
     <string name="literature_item1">diabetyk.pl</string>
     <string name="literature_item2">cukrzyca.pl</string>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <string name="edit">Edytuj</string>
     <string name="delete">Usuń</string>
     <string name="add_reminder">Dodaj przypomnienie</string>
@@ -190,7 +190,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
