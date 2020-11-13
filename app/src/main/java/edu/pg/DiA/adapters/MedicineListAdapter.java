@@ -1,9 +1,6 @@
 package edu.pg.DiA.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import edu.pg.DiA.MainActivity;
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.MedicineListViewHolder;
-import edu.pg.DiA.holders.ProfileListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
-import edu.pg.DiA.models.User;
 import edu.pg.DiA.ui.medicines.MedicineFragment;
 import edu.pg.DiA.ui.reminder.AddNewReminderFragment;
 
@@ -69,7 +63,7 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListViewHo
             @Override
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(context, v);
-                popup.inflate(R.menu.medicine_options_menu);
+                popup.inflate(R.menu.medicine_menu_item);
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
                     @Override

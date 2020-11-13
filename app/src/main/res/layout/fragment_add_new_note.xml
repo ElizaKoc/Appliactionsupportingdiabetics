@@ -5,23 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".ui.medicines.AddNewMedicineFragment">
+    tools:context=".ui.journal.AddNewNoteFragment">
 
     <TextView
-        android:id="@+id/medicine_name_label"
+        android:id="@+id/note_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/medicine_name_label"
+        android:text="@string/note_title_label"
         android:textColor="@color/black"
         android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/medicine_name"
+        app:layout_constraintStart_toStartOf="@+id/note_title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/medicine_name"
+        android:id="@+id/note_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,30 +31,30 @@
         android:layout_marginRight="8dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/medicine_name"
+        android:hint="@string/note_title"
         android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicine_name_label" />
+        app:layout_constraintTop_toBottomOf="@+id/note_title_label" />
 
     <TextView
-        android:id="@+id/medicine_description_label"
+        android:id="@+id/note_body_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/medicine_description_label"
+        android:text="@string/note_body_label"
         android:textColor="@color/black"
         android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/medicine_description"
-        app:layout_constraintTop_toBottomOf="@+id/medicine_name" />
+        app:layout_constraintStart_toStartOf="@+id/note_body"
+        app:layout_constraintTop_toBottomOf="@+id/note_title" />
 
     <EditText
-        android:id="@+id/medicine_description"
+        android:id="@+id/note_body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -64,46 +64,17 @@
         android:layout_marginRight="8dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/medicine_description"
+        android:hint="@string/note_body"
         android:inputType="textMultiLine"
         android:textColor="@color/black"
         android:textColorHint="@color/light_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicine_description_label" />
-
-    <TextView
-        android:id="@+id/medicine_unit_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/medicine_unit_label"
-        android:textColor="@color/black"
-        android:textColorHint="@color/light_gray"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/spinner_medicine_unit"
-        app:layout_constraintTop_toBottomOf="@+id/medicine_description" />
-
-    <Spinner
-        android:id="@+id/spinner_medicine_unit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_horizontal"
-        android:hint="@string/medicine_units"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicine_unit_label" />
+        app:layout_constraintTop_toBottomOf="@+id/note_body_label" />
 
     <Button
-        android:id="@+id/add_button_new_medicine"
+        android:id="@+id/add_button_new_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -117,6 +88,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_medicine_unit" />
+        app:layout_constraintTop_toBottomOf="@+id/note_body" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,10 +35,15 @@
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Profile list-->
     <string name="add_new_profile">Dodaj nowy profil</string>
+    <string name="first_name_label">Imię</string>
     <string name="first_name">Podaj imię</string>
+    <string name="last_name_label">Nazwisko</string>
     <string name="last_name">Podaj nazwisko</string>
+    <string name="birth_year_label">Rok urodzenia</string>
     <string name="birth_year">Podaj rok urodzenia</string>
+    <string name="height_cm_label">Wzrost w cm</string>
     <string name="height_cm">Podaj wzrost w cm</string>
+    <string name="sex_label">Płeć:</string>
     <string name="sex">Podaj płeć</string>
 
     <!-- Spinner sex-->
@@ -67,8 +72,10 @@
     <!--Add medicine-->
     <string name="menu_add_new_medicine">Dodaj nowy lek</string>
 
+    <string name="medicine_name_label">Nazwa</string>
     <string name="medicine_name">Podaj nazwę leku</string>
     <string name="medicine_description">Podaj opis</string>
+    <string name="medicine_unit_label">Jednostka</string>
     <string name="medicine_units">Podaj jednostki</string>
 
     <!--Medicine View-->
@@ -146,11 +153,25 @@
     </string-array>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--Note list-->
+    <string name="add_new_note">Dodaj nową notatkę</string>
+
+    <!--Add note-->
+    <string name="menu_add_new_note">Dodaj nową notatkę</string>
+
+    <string name="note_title">Podaj tytuł</string>
+    <string name="note_body">Podaj treść</string>
+
+    <!--Note View-->
+    <string name="note_title_label">Tytuł</string>
+    <string name="note_body_label">Treść</string>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Literature-->
     <string name="menu_literature">Literatura</string>
 
-    <string name="literature_item1">Literatura 1</string>
-    <string name="literature_item2">Literatura 2</string>
+    <string name="literature_item1">diabetyk.pl</string>
+    <string name="literature_item2">cukrzyca.pl</string>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <string name="edit">Edytuj</string>

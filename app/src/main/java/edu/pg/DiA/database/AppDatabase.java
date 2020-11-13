@@ -16,6 +16,7 @@ import edu.pg.DiA.database.dao.BodyWeightMeasurementDao;
 import edu.pg.DiA.database.dao.GlucoseMeasurementDao;
 import edu.pg.DiA.database.dao.MedicineDao;
 import edu.pg.DiA.database.dao.MedicineReminderDao;
+import edu.pg.DiA.database.dao.NoteDao;
 import edu.pg.DiA.database.dao.ReminderDao;
 import edu.pg.DiA.database.dao.UnitDao;
 import edu.pg.DiA.database.dao.UserDao;
@@ -85,4 +86,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract BodyWeightMeasurementDao bodyWeightMeasurementDao();
     public abstract ReminderDao reminderDao();
     public abstract MedicineReminderDao medicineReminderDao();
+    public abstract NoteDao noteDao();
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import edu.pg.DiA.ui.glucose_measurements.AddNewGlucoseMeasurementFragment;
 import edu.pg.DiA.ui.glucose_measurements.GlucoseMeasurementsFragment;
 import edu.pg.DiA.ui.help.HelpFragment;
 import edu.pg.DiA.ui.journal.JournalFragment;
+import edu.pg.DiA.ui.literature.LiteratureFragment;
 import edu.pg.DiA.ui.medicines.MedicineFragment;
 import edu.pg.DiA.ui.medicines.MedicinesFragment;
 import edu.pg.DiA.ui.profile.ProfileFragment;
@@ -192,16 +194,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().popBackStack();
         } else {
             ProfileFragment profile = (ProfileFragment) fragmentManager.findFragmentByTag("profile");
+            LiteratureFragment literature = (LiteratureFragment) fragmentManager.findFragmentByTag("literature");
             if(profile != null && profile.isVisible()) {
                 super.onBackPressed();
-            }else {
+            }
+            else if(literature != null && literature.isVisible()) {
+                if(literature.webView.canGoBack()) {
+                    literature.webView.goBack();
+                } else {
+                    fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+
+                    if(setHighlightProfile != null) {
+                        setHighlightProfile.setChecked(true);
+                    }
+                }
+            }
+            else {
                 fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
 
                 if(setHighlightProfile != null) {
                     setHighlightProfile.setChecked(true);
                 }
             }
-
         }
     }
 
@@ -301,7 +315,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentClass = JournalFragment.class;
         }
         else if(id == R.id.nav_literature) {
-            fragmentClass = ReportsFragment.class;
+            fragmentClass = LiteratureFragment.class;
+            tag = "literature";
         }
         /*else if(id == R.id.nav_reports) {
             fragmentClass = ReportsFragment.class;

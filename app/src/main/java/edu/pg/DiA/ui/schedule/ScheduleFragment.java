@@ -150,11 +150,19 @@ public class ScheduleFragment extends Fragment{
         dateView.setText(strDate);
 
         Button previewButton =  root.findViewById(R.id.calendar_preview_button);
+        Button addReminderButton =  root.findViewById(R.id.calendar_add_reminder_button);
 
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 moveToScheduleReminderListFragment();
+            }
+        });
+
+        addReminderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToAddReminderFragment();
             }
         });
     }

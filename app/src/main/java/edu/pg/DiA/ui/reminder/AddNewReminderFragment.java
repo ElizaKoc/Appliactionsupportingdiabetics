@@ -63,7 +63,7 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
     private MedicineReminderDao medicineReminderDao;
     private UnitDao unitDao;
 
-    private String isMeasurement, contentTitle, contentText;
+    private String isMeasurement, contentTitle, contentText, selectedDate;
     private String alarmType, weekday, reminderTime, reminderDate, medicineOption, medicineDose;
 
 
@@ -87,8 +87,11 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         medicineReminderDao = db.medicineReminderDao();
         unitDao = db.unitDao();
 
-        medicineId = getArguments().getInt("medicine_id", 0);
-        isMeasurement = getArguments().getString("pomiar_glukozy", "");
+        if(getArguments() != null) {
+            selectedDate = getArguments().getString("date", "");
+            medicineId = getArguments().getInt("medicine_id", 0);
+            isMeasurement = getArguments().getString("pomiar_glukozy", "");
+        }
     }
 
     private void createSpinner(View root) {
@@ -346,6 +349,11 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         else if(isMeasurement == "pomiar glukozy") {
             alarmTypeEdit.setSelection(2);
         }
+
+        if(selectedDate != "") {
+            repeatEdit.setSelection(2);
+            reminderDateEdit.setText(selectedDate);
+        }
     }
 
     private int getIndex(Spinner spinner, String myString){
@@ -374,8 +382,11 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
 
         weekdayEdit.setVisibility(View.GONE);
         weekdayEdit.setSelection(0);
-        reminderDateEdit.setVisibility(View.GONE);
-        reminderDateEdit.setText("");
+
+        if(selectedDate == "") {
+            reminderDateEdit.setVisibility(View.GONE);
+            reminderDateEdit.setText("");
+        }
     }
 
     private Reminder getDataReminder() throws ParseException {
@@ -406,7 +417,6 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
 
     private void clear() {
         medicineDoseEdit.setText("");
-        reminderDateEdit.setText("");
         reminderTimeEdit.setText("");
 
         if (medicineId == 0) {
@@ -423,7 +433,14 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
             alarmTypeEdit.setSelection(0);
         }
 
-        repeatEdit.setSelection(0);
+        if(selectedDate != "") {
+            repeatEdit.setSelection(2);
+            reminderDateEdit.setText(selectedDate);
+        } else {
+            reminderDateEdit.setText("");
+            repeatEdit.setSelection(0);
+        }
+
         weekdayEdit.setSelection(0);
 
         setVisibilityGone();

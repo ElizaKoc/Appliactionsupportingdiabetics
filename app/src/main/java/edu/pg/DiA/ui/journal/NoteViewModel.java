@@ -2,43 +2,44 @@ package edu.pg.DiA.ui.journal;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.List;
-
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.database.dao.NoteDao;
-import edu.pg.DiA.models.Note;
-import edu.pg.DiA.models.User;
 
-public class JournalViewModel extends AndroidViewModel {
+public class NoteViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Integer> mText;
-    private final MutableLiveData<Integer> title;
-    public LiveData<List<Note>> notes;
+    private final MutableLiveData<String> title;
+    private final MutableLiveData<String> body;
     public NoteDao noteDao;
 
-    public JournalViewModel(Application application) {
-
+    public NoteViewModel(@NonNull Application application, int noteId) {
         super(application);
 
         noteDao = AppDatabase.getInstance(application.getApplicationContext()).noteDao();
-        notes = noteDao.getAllNotes(User.getCurrentUser().uId);
 
         mText = new MutableLiveData<>();
         mText.setValue(R.string.no_data);
 
         title = new MutableLiveData<>();
-        title.setValue(R.string.menu_journal);
+        title.setValue(noteDao.getName(noteId));
+
+        body = new MutableLiveData<>();
+        body.setValue(noteDao.getDescription(noteId));
     }
 
     public LiveData<Integer> getText() {
         return mText;
     }
-    public LiveData<Integer> getTitle() {
+    public LiveData<String> getTitle() {
         return title;
+    }
+    public LiveData<String> getBody() {
+        return body;
     }
 }

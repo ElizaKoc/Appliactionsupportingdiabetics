@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.pg.DiA.R;
@@ -63,10 +62,8 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewHolder>{
         String strDate;
 
         if(changeReminders.get(position).date != null) {
-            //strDate = new SimpleDateFormat("yyyy-MM-dd").format(changeReminders.get(position).date);
             strDate = "";
         } else {
-            //strDate = changeReminders.get(position).weekday;
             strDate = "cyklicznie";
         }
         holder.isCyclical.setText(strDate);

@@ -42,10 +42,11 @@ public class Note {
     @TypeConverters({TimestampConverter.class})
     public Date date;
 
-    public Note(int userId, String name, String description) {
+    public Note(int nId, int userId, String name, String description, Date date) {
+        this.nId = nId;
         this.userId = userId;
         this.name = name;
         this.description = description;
-        this.date = new Date();
+        this.date = date;
     }
 }
