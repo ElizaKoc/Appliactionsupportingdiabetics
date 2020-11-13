@@ -24,6 +24,7 @@ import java.util.List;
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.MedicineAdapter;
 import edu.pg.DiA.helpers.MedicineViewModelFactory;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
 import edu.pg.DiA.widgets.CustomRecyclerView;
@@ -64,9 +65,6 @@ public class MedicineFragment extends Fragment implements EventListener {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
 
-        //medicineId = getArguments().getInt("medicineId", 0);
-        //medicineViewModel = new ViewModelProvider(this, new ViewModelFactory(this.getActivity().getApplication(), medicineId)).get(MedicineViewModel.class);
-        //medicineViewModel = ViewModelProviders.of(this).get(MedicineViewModel.class);
         medicineViewModel.medicineReminders.observe(getViewLifecycleOwner(), new Observer<List<MedicineReminderWithMedicineAndReminder>>() {
 
             @Override
@@ -79,7 +77,6 @@ public class MedicineFragment extends Fragment implements EventListener {
         medicineViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(s);
             }
         });
@@ -91,6 +88,7 @@ public class MedicineFragment extends Fragment implements EventListener {
         fragmentManager = getActivity().getSupportFragmentManager();
         medicineId = getArguments().getInt("medicine_id", 0);
         medicineViewModel = new ViewModelProvider(this, new MedicineViewModelFactory(this.getActivity().getApplication(), medicineId)).get(MedicineViewModel.class);
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         CustomRecyclerView recyclerView = root.findViewById(R.id.medicine_list_reminder);
         View mEmptyView = root.findViewById(R.id.empty_drops_medicine_reminder);

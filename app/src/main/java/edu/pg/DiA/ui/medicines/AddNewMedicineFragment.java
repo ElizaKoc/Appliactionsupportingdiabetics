@@ -28,6 +28,7 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.models.User;
 
@@ -77,6 +78,7 @@ public class AddNewMedicineFragment extends Fragment implements AdapterView.OnIt
     private void initView(View root) {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         nameEdit = (EditText) root.findViewById(R.id.medicine_name);
         descriptionEdit = (EditText) root.findViewById(R.id.medicine_description);
@@ -87,7 +89,6 @@ public class AddNewMedicineFragment extends Fragment implements AdapterView.OnIt
         addNewMedicineViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                ab.setDisplayHomeAsUpEnabled(true);
                 ab.setTitle(i);
             }
         });

@@ -96,7 +96,7 @@
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Weight measurements list-->
-    <string name="menu_add_new_weight_measurement">Dodaj nowy pomiar glukozy</string>
+    <string name="menu_add_new_weight_measurement">Dodaj nowy pomiar masy ciała</string>
 
     <string name="weight_measurement_unit">kg</string>
     <string name="weight_measurement_value_txt">Podaj zmierzoną masę ciała w kg</string>

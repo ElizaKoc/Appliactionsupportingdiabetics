@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.pg.DiA.R;
 import edu.pg.DiA.helpers.MedicineViewModelFactory;
 import edu.pg.DiA.helpers.NoteViewModelFactory;
+import edu.pg.DiA.interfaces.DrawerLocker;
 
 public class NoteFragment extends Fragment {
 
@@ -39,6 +40,7 @@ public class NoteFragment extends Fragment {
 
     private void initView(View root) {
 
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
         fragmentManager = getActivity().getSupportFragmentManager();
         noteId = getArguments().getInt("note_id", 0);
         noteViewModel = new ViewModelProvider(this, new NoteViewModelFactory(this.getActivity().getApplication(), noteId)).get(NoteViewModel.class);
@@ -48,7 +50,6 @@ public class NoteFragment extends Fragment {
         noteViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(s);
             }
         });

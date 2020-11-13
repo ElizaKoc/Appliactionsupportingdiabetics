@@ -26,9 +26,9 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.MedicineListAdapter;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
-import edu.pg.DiA.ui.journal.JournalFragment;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
 public class MedicinesFragment extends Fragment implements EventListener {
@@ -78,24 +78,16 @@ public class MedicinesFragment extends Fragment implements EventListener {
         medicinesViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });
-
-        /*medicinesViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer i) {
-                ab.setDisplayHomeAsUpEnabled(false);
-                ab.setTitle(i);
-            }
-        });*/
     }
 
     private void initView(View root) {
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         //RecyclerView recyclerView = root.findViewById(R.id.medicine_list);
         CustomRecyclerView recyclerView = root.findViewById(R.id.medicine_list);

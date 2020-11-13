@@ -28,6 +28,7 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.GlucoseMeasurementsListAdapter;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.GlucoseMeasurement;
 import edu.pg.DiA.ui.reminder.AddNewReminderFragment;
@@ -104,7 +105,6 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
         glucoseMeasurementsViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });
@@ -114,6 +114,7 @@ public class GlucoseMeasurementsFragment extends Fragment implements EventListen
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         CustomRecyclerView recyclerView = root.findViewById(R.id.glucose_measurement_list);
         View mEmptyView = root.findViewById(R.id.empty_drops_glucose_measurements);

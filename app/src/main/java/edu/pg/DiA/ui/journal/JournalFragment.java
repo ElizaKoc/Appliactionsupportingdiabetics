@@ -25,10 +25,9 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.JournalAdapter;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.interfaces.EventListener;
-import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.models.Note;
-import edu.pg.DiA.ui.glucose_measurements.AddNewGlucoseMeasurementFragment;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
 public class JournalFragment extends Fragment implements EventListener {
@@ -55,6 +54,7 @@ public class JournalFragment extends Fragment implements EventListener {
     private void initData() {
 
         setHasOptionsMenu(true);
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         journalViewModel = ViewModelProviders.of(this).get(JournalViewModel.class);
         journalViewModel.notes.observe(this, changeNotes -> {
@@ -81,7 +81,6 @@ public class JournalFragment extends Fragment implements EventListener {
         journalViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });
@@ -91,6 +90,7 @@ public class JournalFragment extends Fragment implements EventListener {
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         CustomRecyclerView recyclerView = root.findViewById(R.id.note_list);
         View mEmptyView = root.findViewById(R.id.empty_drops_notes);

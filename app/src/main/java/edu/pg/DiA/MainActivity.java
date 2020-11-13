@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.User;
 import edu.pg.DiA.ui.diet.DietFragment;
 import edu.pg.DiA.ui.glucose_measurements.AddNewGlucoseMeasurementFragment;
@@ -54,7 +55,7 @@ import androidx.room.Room;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLocker {
 
     public AppDatabase db;
     private AppBarConfiguration mAppBarConfiguration;
@@ -98,7 +99,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
 
             drawer = findViewById(R.id.drawer_layout);
             drawerToggle = setupDrawerToggle();
@@ -190,36 +193,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
         } else {
-            ProfileFragment profile = (ProfileFragment) fragmentManager.findFragmentByTag("profile");
-            LiteratureFragment literature = (LiteratureFragment) fragmentManager.findFragmentByTag("literature");
-            if(profile != null && profile.isVisible()) {
-                super.onBackPressed();
-            }
-            else if(literature != null && literature.isVisible()) {
-                if(literature.webView.canGoBack()) {
-                    literature.webView.goBack();
+
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            } else {
+                ProfileFragment profile = (ProfileFragment) fragmentManager.findFragmentByTag("profile");
+                LiteratureFragment literature = (LiteratureFragment) fragmentManager.findFragmentByTag("literature");
+                if (profile != null && profile.isVisible()) {
+                    super.onBackPressed();
+                } else if (literature != null && literature.isVisible()) {
+                    if (literature.webView.canGoBack()) {
+                        literature.webView.goBack();
+                    } else {
+                        fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
+
+                        if (setHighlightProfile != null) {
+                            setHighlightProfile.setChecked(true);
+                        }
+                    }
                 } else {
                     fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
 
-                    if(setHighlightProfile != null) {
+                    if (setHighlightProfile != null) {
                         setHighlightProfile.setChecked(true);
                     }
                 }
             }
-            else {
-                fragmentManager.beginTransaction().replace(R.id.change_list_fragment, new ProfileFragment(), "profile").commit();
 
-                if(setHighlightProfile != null) {
-                    setHighlightProfile.setChecked(true);
-                }
-            }
+            showBackButton(false);
+            setTitle(getTitle());
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.main, menu);
@@ -234,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    /*@Override
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -359,5 +368,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle setupDrawerToggle() {
 
         return new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
+
+    @Override
+    public void setDrawerLocked(boolean enabled) {
+        if(enabled){
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            showBackButton(true);
+
+            drawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+            drawer.addDrawerListener(drawerToggle);
+            drawerToggle.syncState();
+
+        }else{
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            showBackButton(false);
+
+            drawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            });
+            drawer.addDrawerListener(drawerToggle);
+            drawerToggle.syncState();
+        }
+    }
+
+    public void showBackButton(boolean isBack){
+        drawerToggle.setDrawerIndicatorEnabled(!isBack);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(isBack);
+        drawerToggle.syncState();
     }
 }

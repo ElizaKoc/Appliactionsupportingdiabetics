@@ -22,6 +22,7 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.GlucoseMeasurementReminderListAdapter;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
@@ -73,7 +74,6 @@ public class GlucoseMeasurementReminderListFragment extends Fragment {
         glucoseMeasurementReminderListViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });
@@ -83,6 +83,7 @@ public class GlucoseMeasurementReminderListFragment extends Fragment {
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         CustomRecyclerView recyclerView = root.findViewById(R.id.glucose_measurement_reminder_list);
         View mEmptyView = root.findViewById(R.id.empty_drops_glucose_measurement_reminder);

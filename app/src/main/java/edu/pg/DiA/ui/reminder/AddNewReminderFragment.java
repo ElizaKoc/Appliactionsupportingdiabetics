@@ -43,6 +43,7 @@ import edu.pg.DiA.database.dao.MedicineDao;
 import edu.pg.DiA.database.dao.MedicineReminderDao;
 import edu.pg.DiA.database.dao.ReminderDao;
 import edu.pg.DiA.database.dao.UnitDao;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.MedicineReminder;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.models.User;
@@ -131,6 +132,7 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
 
     private void initView(View root) {
 
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
         String[] spinnerName = new String[]{"alarm_type", "repeat", "weekday"};
         setFields(root);
@@ -141,7 +143,6 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         addNewReminderViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                ab.setDisplayHomeAsUpEnabled(true);
                 ab.setTitle(i);
             }
         });

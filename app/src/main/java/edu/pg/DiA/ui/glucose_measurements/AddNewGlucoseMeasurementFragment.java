@@ -22,6 +22,7 @@ import java.util.Date;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.GlucoseMeasurement;
 import edu.pg.DiA.models.User;
 
@@ -54,6 +55,7 @@ public class AddNewGlucoseMeasurementFragment extends Fragment{
     private void initView(View root) {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         measurementValueEdit = (EditText) root.findViewById(R.id.glucose_measurement_value);
 
@@ -62,7 +64,6 @@ public class AddNewGlucoseMeasurementFragment extends Fragment{
         addNewGlucoseMeasurementViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                ab.setDisplayHomeAsUpEnabled(true);
                 ab.setTitle(i);
             }
         });

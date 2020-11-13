@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.ui.profile.ProfileViewModel;
 
 public class HelpFragment extends Fragment{
@@ -31,6 +32,7 @@ public class HelpFragment extends Fragment{
     private void updateData(View root) {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         helpViewModel = ViewModelProviders.of(this).get(HelpViewModel.class);
 
@@ -45,7 +47,6 @@ public class HelpFragment extends Fragment{
         helpViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });

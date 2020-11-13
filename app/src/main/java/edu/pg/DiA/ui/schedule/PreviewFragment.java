@@ -27,6 +27,7 @@ import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.PreviewAdapter;
 import edu.pg.DiA.helpers.MedicineViewModelFactory;
 import edu.pg.DiA.helpers.PreviewViewModelFactory;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.ui.medicines.MedicineViewModel;
 import edu.pg.DiA.widgets.CustomRecyclerView;
@@ -85,7 +86,6 @@ public class PreviewFragment extends Fragment {
         previewViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(s);
             }
         });
@@ -95,6 +95,7 @@ public class PreviewFragment extends Fragment {
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         CustomRecyclerView recyclerView = root.findViewById(R.id.schedule_reminder_list);
         View mEmptyView = root.findViewById(R.id.empty_drops_schedule_reminder);

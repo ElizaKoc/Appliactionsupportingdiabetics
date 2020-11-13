@@ -23,6 +23,7 @@ import java.util.Date;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.Note;
 import edu.pg.DiA.models.User;
 
@@ -49,6 +50,7 @@ public class AddNewNoteFragment extends Fragment {
     private void initView(View root) {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         titleEdit = (EditText) root.findViewById(R.id.note_title);
         bodyEdit = (EditText) root.findViewById(R.id.note_body);
@@ -58,7 +60,6 @@ public class AddNewNoteFragment extends Fragment {
         addNewNoteViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                ab.setDisplayHomeAsUpEnabled(true);
                 ab.setTitle(i);
             }
         });

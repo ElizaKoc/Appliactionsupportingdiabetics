@@ -1,6 +1,5 @@
 package edu.pg.DiA.ui.literature;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.interfaces.DrawerLocker;
 
 public class LiteratureFragment extends Fragment {
 
@@ -65,7 +65,6 @@ public class LiteratureFragment extends Fragment {
         literatureViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });
@@ -74,6 +73,7 @@ public class LiteratureFragment extends Fragment {
     private void initView(View root) {
 
         setHasOptionsMenu(true);
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         webView = (WebView) root.findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);

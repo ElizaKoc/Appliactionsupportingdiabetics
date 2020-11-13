@@ -22,6 +22,7 @@ import java.util.Date;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.BodyWeightMeasurement;
 import edu.pg.DiA.models.User;
 
@@ -48,6 +49,7 @@ public class AddNewWeightMeasurementFragment extends Fragment{
     private void initView(View root) {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((DrawerLocker)getActivity()).setDrawerLocked(true);
 
         measurementValueEdit = (EditText) root.findViewById(R.id.weight_measurement_value);
 
@@ -56,7 +58,6 @@ public class AddNewWeightMeasurementFragment extends Fragment{
         addNewWeightMeasurementViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                ab.setDisplayHomeAsUpEnabled(true);
                 ab.setTitle(i);
             }
         });

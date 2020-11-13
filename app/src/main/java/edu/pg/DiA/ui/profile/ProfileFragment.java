@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,11 +15,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.Calendar;
-import java.util.List;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.models.User;
-import edu.pg.DiA.ui.profile_list.ProfileListViewModel;
 
 public class ProfileFragment extends Fragment{
 
@@ -36,6 +34,7 @@ public class ProfileFragment extends Fragment{
     private void updateData(View root) {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
 
@@ -84,7 +83,6 @@ public class ProfileFragment extends Fragment{
         profileViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });

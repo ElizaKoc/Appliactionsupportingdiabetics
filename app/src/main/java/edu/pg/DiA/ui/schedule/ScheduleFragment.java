@@ -32,6 +32,7 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.helpers.FindWeekday;
+import edu.pg.DiA.interfaces.DrawerLocker;
 import edu.pg.DiA.ui.reminder.AddNewReminderFragment;
 
 public class ScheduleFragment extends Fragment{
@@ -126,7 +127,6 @@ public class ScheduleFragment extends Fragment{
         scheduleViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                //ab.setDisplayHomeAsUpEnabled(false);
                 ab.setTitle(i);
             }
         });
@@ -141,6 +141,7 @@ public class ScheduleFragment extends Fragment{
 
         Context context = getActivity().getApplicationContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
         //calenderView = (CalendarView) root.findViewById(R.id.calendar_view);
         setCalendar(root);
