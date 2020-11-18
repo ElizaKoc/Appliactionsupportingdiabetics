@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.WeightMeasurementsListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.BodyWeightMeasurement;
@@ -69,6 +70,7 @@ public class WeightMeasurementsListAdapter extends RecyclerView.Adapter<WeightMe
 
                         int id = item.getItemId();
                         if (id == R.id.weight_measurement_delete) {
+                            AppDatabase.getInstance(context).bodyWeightMeasurementDao().delete(changeWeightMeasurements.get(position));
                             return true;
                         }
                         else {

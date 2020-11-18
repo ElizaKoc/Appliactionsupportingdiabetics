@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.JournalViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
@@ -79,7 +80,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalViewHolder>{
                             return true;
                         }
                         else if(id == R.id.note_delete) {
-
+                            AppDatabase.getInstance(context).noteDao().delete(note);
                             return true;
                         }
                         else {

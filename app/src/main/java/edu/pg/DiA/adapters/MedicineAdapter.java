@@ -2,8 +2,10 @@ package edu.pg.DiA.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +20,15 @@ import edu.pg.DiA.holders.MedicineViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
+import edu.pg.DiA.models.Reminder;
+import edu.pg.DiA.ui.reminder.EditReminderFragment;
 
 public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder>{
 
     private Context context;
     private List<MedicineReminderWithMedicineAndReminder> changeMedicineReminders = null;
     private EventListener listener;
+    private MedicineReminderWithMedicineAndReminder medicineReminder;
     public Medicine medicine;
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -68,13 +73,36 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder>{
         holder.unit.setText(unitName);
 
         holder.time.setText(changeMedicineReminders.get(position).reminder.time);
-        holder.medicineReminderListItem.setOnClickListener(new View.OnClickListener() {
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context, v);
+                popup.inflate(R.menu.medicine_reminder_menu_item);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int id = item.getItemId();
+                        if(id == R.id.medicine_reminder_edit) {
+                            medicineReminder = changeMedicineReminders.get(position);
+                            listener.onEvent(new EditReminderFragment());
+                            return true;
+                        }
+                        else if(id == R.id.medicine_reminder_delete) {
+                            changeMedicineReminders.get(position).reminder.deleteReminder(context);
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                popup.show();
             }
         });
-
     }
 
     @Override
@@ -83,5 +111,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder>{
             return changeMedicineReminders.size();
         }
         return 0;
+    }
+
+    public MedicineReminderWithMedicineAndReminder getReminder() {
+        return medicineReminder;
     }
 }

@@ -51,7 +51,7 @@ import edu.pg.DiA.models.User;
         Reminder.class,
         Unit.class
     },
-    version = 7)
+    version = 8)
 
 public abstract class AppDatabase extends RoomDatabase {
 

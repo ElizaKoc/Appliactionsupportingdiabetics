@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -124,6 +125,27 @@ public class MedicineFragment extends Fragment implements EventListener {
 
     @Override
     public void onEvent(Fragment fragment) {
+
+        Bundle args = new Bundle();
+        args.putInt("reminder_id", medicineAdapter.getReminder().reminder.rId);
+        args.putInt("medicine_id", medicineAdapter.getReminder().medicine_reminder.medicineId);
+        args.putString("dose", medicineAdapter.getReminder().medicine_reminder.doseUnits);
+        args.putString("alarm_type", medicineAdapter.getReminder().reminder.alarm);
+        args.putLong("date", medicineAdapter.getReminder().reminder.date != null ? medicineAdapter.getReminder().reminder.date.getTime() : 0);
+        args.putString("weekday", medicineAdapter.getReminder().reminder.weekday);
+        args.putString("time", medicineAdapter.getReminder().reminder.time);
+        fragment.setArguments(args);
+
+        // Create new fragment and transaction
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.change_list_fragment, fragment);
+        transaction.setReorderingAllowed(true).addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
 
     }
 }

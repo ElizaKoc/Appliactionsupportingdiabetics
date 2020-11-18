@@ -18,6 +18,7 @@ import edu.pg.DiA.models.User;
 public class ProfileListViewModel extends AndroidViewModel {
 
     private MutableLiveData<Integer> mText;
+    private MutableLiveData<Integer> title;
     public LiveData<List<User>> profiles;
     public UserDao userDao;
 
@@ -29,10 +30,16 @@ public class ProfileListViewModel extends AndroidViewModel {
         profiles = userDao.getAll();
 
         mText = new MutableLiveData<>();
-        mText.setValue(R.string.menu_profile_list);
+        mText.setValue(R.string.no_data);
+
+        title = new MutableLiveData<>();
+        title.setValue(R.string.menu_profile_list);
     }
 
-    public LiveData<Integer> getTitle() {
+    public LiveData<Integer> getText() {
         return mText;
+    }
+    public LiveData<Integer> getTitle() {
+        return title;
     }
 }

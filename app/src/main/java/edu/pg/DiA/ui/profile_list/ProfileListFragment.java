@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +26,14 @@ import java.util.List;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.ProfileListAdapter;
+import edu.pg.DiA.adapters.WeightMeasurementsListAdapter;
 import edu.pg.DiA.models.User;
 import edu.pg.DiA.ui.add_new_profile.AddNewProfileFragment;
+import edu.pg.DiA.widgets.CustomRecyclerView;
 
 public class ProfileListFragment extends Fragment {
 
+    private ProfileListViewModel profileListViewModel;
     private ProfileListAdapter profileListAdapter;
     public List<User> profiles;
 
@@ -48,7 +52,7 @@ public class ProfileListFragment extends Fragment {
     }
 
     private void initData() {
-        ProfileListViewModel profileListViewModel = ViewModelProviders.of(this).get(ProfileListViewModel.class);
+        profileListViewModel = ViewModelProviders.of(this).get(ProfileListViewModel.class);
         profileListViewModel.profiles.observe(this, changeProfiles -> {
                 profiles = changeProfiles;
                 profileListAdapter.setProfiles(profiles);}
@@ -59,7 +63,7 @@ public class ProfileListFragment extends Fragment {
 
         ActionBar ab = ((AppCompatActivity)getActivity()).getSupportActionBar();
 
-        ProfileListViewModel profileListViewModel = ViewModelProviders.of(this).get(ProfileListViewModel.class);
+        profileListViewModel = ViewModelProviders.of(this).get(ProfileListViewModel.class);
         profileListViewModel.profiles.observe(getViewLifecycleOwner(), new Observer<List<User>>() {
 
             @Override
@@ -80,11 +84,26 @@ public class ProfileListFragment extends Fragment {
 
     private void initView(View root) {
         Context context = getActivity().getApplicationContext();
-        RecyclerView recyclerView = root.findViewById(R.id.profile_list);
+        CustomRecyclerView recyclerView = root.findViewById(R.id.profile_list);
+        View mEmptyView = root.findViewById(R.id.empty_drops_profile_list);
+        recyclerView.showIfEmpty(mEmptyView);
         profileListAdapter = new ProfileListAdapter(requireContext());
         recyclerView.setAdapter(profileListAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        final TextView noData = root.findViewById(R.id.profile_list_no_data);
+        profileListViewModel.getText().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer i) {
+                if(profileListAdapter.getItemCount() == 0) {
+                    noData.setText(i);
+                    noData.setVisibility(View.VISIBLE);
+                } else {
+                    noData.setVisibility(View.GONE);
+                }
+            }
+        });
 
         FloatingActionButton add_profile_button = root.findViewById(R.id.add_profile_button);
         add_profile_button.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +123,6 @@ public class ProfileListFragment extends Fragment {
 
                 // Commit the transaction
                 transaction.commit();
-
-                //Intent intent = new Intent(getActivity(), AddNewProfileActivity.class);
-                //startActivity(intent);
-                //getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new AddProfileFragment()).commit();
             }
         });
     }

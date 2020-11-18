@@ -2,8 +2,10 @@ package edu.pg.DiA.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +70,31 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewHolder>{
         }
         holder.isCyclical.setText(strDate);
         holder.time.setText(changeReminders.get(position).time);
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context, v);
+                popup.inflate(R.menu.schedule_reminder_menu_item);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int id = item.getItemId();
+                        if(id == R.id.schedule_reminder_delete) {
+                            changeReminders.get(position).deleteReminder(context);
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                popup.show();
+            }
+        });
     }
 
     @Override

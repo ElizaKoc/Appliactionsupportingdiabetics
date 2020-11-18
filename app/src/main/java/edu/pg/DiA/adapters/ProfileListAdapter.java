@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,8 @@ import edu.pg.DiA.MainActivity;
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.ProfileListViewHolder;
+import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
+import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.models.User;
 
 public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHolder>{
@@ -52,9 +56,51 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHold
 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        //holder.userId.setText(changeProfiles.get(position).uId);
         holder.userFirstName.setText(changeProfiles.get(position).firstName);
         holder.userLastName.setText(changeProfiles.get(position).lastName);
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context, v);
+                popup.inflate(R.menu.profile_list_menu_item);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int id = item.getItemId();
+                        if (id == R.id.profile_edit) {
+                            return true;
+                        }
+                        else if (id == R.id.profile_delete) {
+
+                            AppDatabase db = AppDatabase.getInstance(context);
+
+                            List<Reminder> reminders = db.reminderDao().getAllUserReminders(changeProfiles.get(position).uId);
+                            for(Reminder reminder : reminders) {
+                                reminder.deleteReminder(context);
+                            }
+
+                            if(changeProfiles.get(position).uId == User.getCurrentUser().uId) {
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putInt((context.getString(R.string.preference_file_key)), 0);
+                                editor.apply();
+                            }
+
+                            db.userDao().delete(changeProfiles.get(position));
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                popup.show();
+            }
+        });
+
         holder.profileListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

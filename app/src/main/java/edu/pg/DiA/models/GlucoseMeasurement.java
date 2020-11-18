@@ -25,7 +25,7 @@ import edu.pg.DiA.helpers.TimestampConverter;
                         entity = Reminder.class,
                         parentColumns = "id",
                         childColumns = "reminder_id",
-                        onDelete = ForeignKey.CASCADE
+                        onDelete = ForeignKey.SET_NULL
                 )
         },
         indices = {@Index("user_id"), @Index("reminder_id")}

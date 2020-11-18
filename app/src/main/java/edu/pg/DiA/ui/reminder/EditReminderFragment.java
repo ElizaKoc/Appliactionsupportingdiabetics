@@ -25,17 +25,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.temporal.TemporalAdjusters;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
@@ -48,10 +47,10 @@ import edu.pg.DiA.models.MedicineReminder;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.models.User;
 
-public class AddNewReminderFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class EditReminderFragment extends Fragment {
 
-    private AddNewReminderViewModel addNewReminderViewModel;
-    private  int user = User.getCurrentUser().uId, medicineId;
+    private EditReminderViewModel editReminderViewModel;
+    private  int user = User.getCurrentUser().uId, reminderId, editMedicineId;
     private Context context;
 
     private TextView spinnerMedicineOptionLabel, medicineDoseLabel;
@@ -65,12 +64,11 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
     private UnitDao unitDao;
 
     private String isMeasurement, selectedDate;
-    private String alarmType, weekday, reminderTime, reminderDate, medicineOption, medicineDose;
-
+    private String alarmType, weekday, reminderTime, reminderDate, medicineOption, medicineDose, editAlarmType, editDate, editWeekday, editReminderTime, editDose;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_add_new_reminder, container, false);
+        View root = inflater.inflate(R.layout.fragment_edit_reminder, container, false);
         initView(root);
         return root;
     }
@@ -89,15 +87,28 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         unitDao = db.unitDao();
 
         if(getArguments() != null) {
-            selectedDate = getArguments().getString("date", "");
-            medicineId = getArguments().getInt("medicine_id", 0);
-            isMeasurement = getArguments().getString("pomiar_glukozy", "");
+
+            reminderId = getArguments().getInt("reminder_id", 0);
+            editMedicineId = getArguments().getInt("medicine_id", 0);
+            editDose = getArguments().getString("dose", "");
+            editAlarmType = getArguments().getString("alarm_type", "");
+            editWeekday = getArguments().getString("weekday", "");
+
+            if(editWeekday.equals("")) {
+                String d = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(getArguments().getLong("date", 0)));
+                String[] array = d.split(" ");
+                editDate = array[0];
+            }else {
+                editDate = "";
+            }
+
+            editReminderTime = getArguments().getString("time", "");
         }
     }
 
     private void createSpinner(View root) {
 
-        Spinner spinner = (Spinner) root.findViewById(R.id.spinner_medicine_option);
+        Spinner spinner = (Spinner) root.findViewById(R.id.spinner_medicine_option_edit);
 
         db = AppDatabase.getInstance(context);
         List<String> spinnerMedicineOption = new ArrayList<String>();
@@ -117,7 +128,7 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
 
     private void createSpinner(View root, String name_of_spinner) {
 
-        int id = getResources().getIdentifier("spinner_" + name_of_spinner, "id", getActivity().getPackageName());
+        int id = getResources().getIdentifier("spinner_" + name_of_spinner + "_edit", "id", getActivity().getPackageName());
         int layout = getResources().getIdentifier("spinner_item_reminder_" + name_of_spinner, "layout", getActivity().getPackageName());
         int array = getResources().getIdentifier(name_of_spinner + "_array", "array", getActivity().getPackageName());
 
@@ -138,9 +149,9 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         setFields(root);
         setVisibilityGone();
 
-        addNewReminderViewModel =
-                ViewModelProviders.of(this).get(AddNewReminderViewModel.class);
-        addNewReminderViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        editReminderViewModel =
+                ViewModelProviders.of(this).get(EditReminderViewModel.class);
+        editReminderViewModel.getTitle().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
                 ab.setTitle(i);
@@ -156,7 +167,7 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         setOnItemSelected(alarmTypeEdit);
         setOnItemSelected(repeatEdit);
 
-        Button addButton =  root.findViewById(R.id.add_button_new_reminder);
+        Button addButton =  root.findViewById(R.id.edit_button_reminder);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,35 +175,32 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
                 long result = -1;
 
                 try {
-                    Reminder dataReminder = getDataReminder();
-                    result = reminderDao.insert(dataReminder);
+                    if(updateReminder()) {
 
-                    if(!(medicineOption.equals(""))) {
+                        result = 1;
 
-                        int medicineId = medicineDao.getMedicineId(user, medicineOption);
-                        int reminderId = reminderDao.getLatesReminderId();
+                        if (!(medicineOption.equals(""))) {
 
-                        MedicineReminder medicineReminder = new MedicineReminder(medicineId, reminderId, medicineDose);
-                        result = medicineReminderDao.insert(medicineReminder);
+                            int medicineId = medicineDao.getMedicineId(user, medicineOption);
+                            medicineReminderDao.updateMedicineReminder(medicineId, medicineDose, reminderId);
+                        }
+
+                        setAlarm();
                     }
 
-                    setAlarm();
-
-                    if(result == -1) {
-                        Toast.makeText(getContext(), "Nie udało się dodać przypomnienia",
+                    if (result == -1) {
+                        Toast.makeText(getContext(), "Nie udało się zmienić przypomnienia",
                                 Toast.LENGTH_SHORT).show();
 
                     } else {
-                        clear();
-
-                        Toast.makeText(getContext(), "Dodano przypomnienie",
+                        Toast.makeText(getContext(), "Zmieniono przypomnienie",
                                 Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (ParseException e) {
 
                     if(reminderDateEdit.getVisibility() == View.GONE) {
-                        Toast.makeText(getContext(), "Nie udało się dodać przypomnienia",
+                        Toast.makeText(getContext(), "Nie udało się zmienić przypomnienia",
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "Niewłaściwy format daty!",
@@ -202,7 +210,7 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    Toast.makeText(getContext(), "Nie udało się dodać przypomnienia",
+                    Toast.makeText(getContext(), "Nie udało się zmienić przypomnienia",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -314,33 +322,45 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
 
     private void setFields(View root) {
 
-        spinnerMedicineOptionLabel = (TextView) root.findViewById(R.id.spinner_medicine_option_label);
-        medicineDoseLabel = (TextView) root.findViewById(R.id.medicine_dose_label);
+        spinnerMedicineOptionLabel = (TextView) root.findViewById(R.id.spinner_medicine_option_label_edit);
+        medicineDoseLabel = (TextView) root.findViewById(R.id.medicine_dose_label_edit);
 
-        medicineDoseEdit = (EditText) root.findViewById(R.id.medicine_dose);
-        reminderDateEdit = (EditText) root.findViewById(R.id.reminder_date);
-        reminderTimeEdit = (EditText) root.findViewById(R.id.reminder_time);
+        medicineDoseEdit = (EditText) root.findViewById(R.id.medicine_dose_edit);
+        reminderDateEdit = (EditText) root.findViewById(R.id.reminder_date_edit);
+        reminderTimeEdit = (EditText) root.findViewById(R.id.reminder_time_edit);
 
-        alarmTypeEdit = (Spinner) root.findViewById(R.id.spinner_alarm_type);
-        medicineOptionEdit = (Spinner) root.findViewById(R.id.spinner_medicine_option);
-        repeatEdit = (Spinner) root.findViewById(R.id.spinner_repeat);
-        weekdayEdit = (Spinner) root.findViewById(R.id.spinner_weekday);
+        alarmTypeEdit = (Spinner) root.findViewById(R.id.spinner_alarm_type_edit);
+        medicineOptionEdit = (Spinner) root.findViewById(R.id.spinner_medicine_option_edit);
+        repeatEdit = (Spinner) root.findViewById(R.id.spinner_repeat_edit);
+        weekdayEdit = (Spinner) root.findViewById(R.id.spinner_weekday_edit);
+
+        (root.findViewById(R.id.spinner_alarm_type_label_edit)).setVisibility(View.GONE);
     }
 
     private void setDefaultValues() {
 
-        if(medicineId != 0) {
+        alarmTypeEdit.setVisibility(View.INVISIBLE);
+
+        if(editMedicineId != 0) {
             alarmTypeEdit.setSelection(1);
-            medicineOptionEdit.setSelection(getIndex(medicineOptionEdit, medicineDao.getName(medicineId)));
+            medicineOptionEdit.setSelection(getIndex(medicineOptionEdit, medicineDao.getName(editMedicineId)));
+            medicineDoseEdit.setText(editDose);
         }
-        else if(isMeasurement.equals("pomiar glukozy")) {
+        else if(editAlarmType.equals("pomiar glukozy")) {
             alarmTypeEdit.setSelection(2);
         }
 
-        if(!selectedDate.equals("")) {
+        if(!editDate.equals("")) {
             repeatEdit.setSelection(2);
-            reminderDateEdit.setText(selectedDate);
+            reminderDateEdit.setText(editDate);
         }
+        else if(!editWeekday.equals("")){
+            repeatEdit.setSelection(1);
+            weekdayEdit.setSelection(getIndex(weekdayEdit, editWeekday));
+        }
+
+        reminderTimeEdit.setText(editReminderTime);
+
     }
 
     private int getIndex(Spinner spinner, String myString){
@@ -357,7 +377,7 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
 
     private void setVisibilityGone() {
 
-        if(medicineId == 0) {
+        if(editMedicineId == 0) {
             spinnerMedicineOptionLabel.setVisibility(View.GONE);
             medicineDoseLabel.setVisibility(View.GONE);
 
@@ -370,13 +390,13 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         weekdayEdit.setVisibility(View.GONE);
         weekdayEdit.setSelection(0);
 
-        if(selectedDate.equals("")) {
+        if(editDate.equals("")) {
             reminderDateEdit.setVisibility(View.GONE);
             reminderDateEdit.setText("");
         }
     }
 
-    private Reminder getDataReminder() throws ParseException {
+    private boolean updateReminder() throws ParseException {
 
         Date reminderDateParsed = null;
 
@@ -393,54 +413,13 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         medicineOption = (medicineOptionEdit).getSelectedItem().toString();
         medicineDose = (medicineDoseEdit).getText().toString();
 
-        //int userId = user;
-        //int unitId = db.unitDao().getUnitId((unitEdit).getSelectedItem().toString());
-
         if(alarmType.equals("") || reminderTime.equals("") || (weekday.equals("") && reminderDate.equals("")) || (alarmType.equals("lekarstwo") && (medicineDose.equals("") || medicineOption.equals(""))) || (!weekday.equals("") && !reminderDate.equals(""))) {
-            return null;
+            return false;
         }
-        return new Reminder(0, user, alarmType, weekday, reminderTime, reminderDateParsed);
-    }
+        else {
 
-    private void clear() {
-        medicineDoseEdit.setText("");
-        reminderTimeEdit.setText("");
-
-        if (medicineId == 0) {
-
-            medicineOptionEdit.setSelection(0);
-
-            if(isMeasurement.equals("pomiar glukozy")) {
-                alarmTypeEdit.setSelection(2);
-            } else {
-                alarmTypeEdit.setSelection(0);
-            }
-
-        } else {
-            alarmTypeEdit.setSelection(1);
-            medicineOptionEdit.setSelection(getIndex(medicineOptionEdit, medicineDao.getName(medicineId)));
+            reminderDao.updateReminder(weekday, reminderTime, reminderDateParsed, reminderId);
+            return true;
         }
-
-        if(!selectedDate.equals("")) {
-            repeatEdit.setSelection(2);
-            reminderDateEdit.setText(selectedDate);
-        } else {
-            reminderDateEdit.setText("");
-            repeatEdit.setSelection(0);
-        }
-
-        weekdayEdit.setSelection(0);
-
-        setVisibilityGone();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

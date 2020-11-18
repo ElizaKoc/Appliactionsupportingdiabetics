@@ -6,10 +6,12 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 
 import java.util.Date;
 import java.util.List;
 
+import edu.pg.DiA.helpers.TimestampConverter;
 import edu.pg.DiA.models.Reminder;
 
 @Dao
@@ -24,18 +26,27 @@ public interface ReminderDao {
     @Query("SELECT date FROM reminder WHERE user_id = :userId AND date IS NOT NULL")
     LiveData<List<String>> getAllUserReminderDates(int userId);
 
-
     @Query("SELECT weekday FROM reminder WHERE user_id = :userId AND weekday IS NOT NULL")
     LiveData<List<String>> getAllUserReminderWeekdays(int userId);
 
     @Query("SELECT id FROM reminder  ORDER BY id DESC LIMIT 1")
     Integer getLatesReminderId();
 
+    @Query("SELECT * FROM reminder  WHERE id = :rId")
+    Reminder getReminderById(int rId);
+
     @Query("SELECT user_id FROM reminder  WHERE id = :rId")
     int getUserId(int rId);
 
+    @Query("SELECT * FROM reminder  WHERE user_id = :userId")
+    List<Reminder> getAllUserReminders(int userId);
+
     @Query("SELECT * FROM reminder  WHERE alarm = :alarm AND user_id = :userId")
     LiveData<List<Reminder>> getMeasurementReminders(String alarm, int userId);
+
+    @TypeConverters({TimestampConverter.class})
+    @Query("UPDATE reminder SET weekday = :weekday, time = :time, date = :date WHERE id = :rId")
+    void updateReminder(String weekday, String time, Date date, int rId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Reminder> reminders);

@@ -13,6 +13,13 @@ import java.util.Random;
 
 import edu.pg.DiA.MainActivity;
 import edu.pg.DiA.R;
+import edu.pg.DiA.database.AppDatabase;
+import edu.pg.DiA.database.dao.MedicineDao;
+import edu.pg.DiA.database.dao.MedicineReminderDao;
+import edu.pg.DiA.database.dao.ReminderDao;
+import edu.pg.DiA.database.dao.UnitDao;
+import edu.pg.DiA.models.MedicineReminder;
+import edu.pg.DiA.models.Reminder;
 
 import static edu.pg.DiA.DiA.CHANNEL_1_ID;
 
@@ -22,10 +29,15 @@ public class Receiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         int reminderId = intent.getIntExtra("reminder_id", 0);
-        int iconReminder = intent.getIntExtra("icon", 0);
         String alarmType = intent.getStringExtra("alarm_type");
-        String contentTitle = intent.getStringExtra("content_title");
-        String contentText = intent.getStringExtra("content_text");
+
+        AppDatabase db = AppDatabase.getInstance(context);
+        ReminderDao reminderDao = db.reminderDao();
+        Reminder reminder = reminderDao.getReminderById(reminderId);
+
+        int iconReminder = reminder.getNotificationIcon();
+        String contentTitle = reminder.getNotificationTitle();
+        String contentText = reminder.getNotificationContent(context);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(iconReminder)

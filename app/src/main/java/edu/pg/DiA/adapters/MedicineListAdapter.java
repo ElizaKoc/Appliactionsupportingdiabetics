@@ -17,6 +17,7 @@ import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.MedicineListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
+import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
 import edu.pg.DiA.ui.medicines.MedicineFragment;
 import edu.pg.DiA.ui.reminder.AddNewReminderFragment;
 
@@ -81,7 +82,11 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListViewHo
                             return true;
                         }
                         else if(id == R.id.medicine_delete) {
-
+                            List<MedicineReminderWithMedicineAndReminder> medicineReminders = AppDatabase.getInstance(context).medicineReminderDao().getRemindersList(changeMedicines.get(position).mId);
+                            for(MedicineReminderWithMedicineAndReminder reminder : medicineReminders){
+                                reminder.reminder.deleteReminder(context);
+                            }
+                            AppDatabase.getInstance(context).medicineDao().delete(changeMedicines.get(position));
                             return true;
                         }
                         else {

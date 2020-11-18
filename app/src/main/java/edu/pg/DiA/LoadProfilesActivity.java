@@ -33,7 +33,6 @@ import edu.pg.DiA.ui.profile_list.ProfileListFragment;
 
 public class LoadProfilesActivity extends AppCompatActivity{
 
-    private AppBarConfiguration mAppBarConfiguration;
     public Fragment profileListFragment = new ProfileListFragment();
     public FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
@@ -49,13 +48,6 @@ public class LoadProfilesActivity extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
-                /*Fragment profileListFragment = new ProfileListFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.profile_list_fragment, profileListFragment);
-                transaction.setReorderingAllowed(true).addToBackStack(null);
-                transaction.commit();*/
-
                 onBackPressed();
 
                 Toast.makeText(getApplicationContext(), "Back clicked!",
@@ -65,19 +57,9 @@ public class LoadProfilesActivity extends AppCompatActivity{
 
         ft.add(R.id.profile_list_fragment, profileListFragment);
         ft.commit();
-
-        //layout.setVisibility(View.VISIBLE);
-
-        //mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_profile_list, R.id.nav_add_new_profile).build();
-        //NavController navController = Navigation.findNavController(this, R.id.profile_list_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     }
 
-    public String getTest() {
-        return "TEST";
-    }
-
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -87,14 +69,7 @@ public class LoadProfilesActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.profile_list_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+    }*/
 
     @Override
     public void onBackPressed() {

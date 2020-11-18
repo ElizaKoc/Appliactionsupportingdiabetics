@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -23,10 +24,11 @@ import java.util.List;
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.GlucoseMeasurementReminderListAdapter;
 import edu.pg.DiA.interfaces.DrawerLocker;
+import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
-public class GlucoseMeasurementReminderListFragment extends Fragment {
+public class GlucoseMeasurementReminderListFragment extends Fragment implements EventListener {
 
     private GlucoseMeasurementReminderListViewModel glucoseMeasurementReminderListViewModel;
     private GlucoseMeasurementReminderListAdapter glucoseMeasurementReminderListAdapter;
@@ -89,7 +91,7 @@ public class GlucoseMeasurementReminderListFragment extends Fragment {
         View mEmptyView = root.findViewById(R.id.empty_drops_glucose_measurement_reminder);
         recyclerView.showIfEmpty(mEmptyView);
 
-        glucoseMeasurementReminderListAdapter = new GlucoseMeasurementReminderListAdapter(requireContext());
+        glucoseMeasurementReminderListAdapter = new GlucoseMeasurementReminderListAdapter(requireContext(), this);
         recyclerView.setAdapter(glucoseMeasurementReminderListAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -106,5 +108,27 @@ public class GlucoseMeasurementReminderListFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onEvent(@Nullable Fragment fragment) {
+        Bundle args = new Bundle();
+        args.putInt("reminder_id", glucoseMeasurementReminderListAdapter.getReminder().rId);
+        args.putString("alarm_type", glucoseMeasurementReminderListAdapter.getReminder().alarm);
+        args.putLong("date", glucoseMeasurementReminderListAdapter.getReminder().date != null ? glucoseMeasurementReminderListAdapter.getReminder().date.getTime() : 0);
+        args.putString("weekday", glucoseMeasurementReminderListAdapter.getReminder().weekday);
+        args.putString("time", glucoseMeasurementReminderListAdapter.getReminder().time);
+        fragment.setArguments(args);
+
+        // Create new fragment and transaction
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.change_list_fragment, fragment);
+        transaction.setReorderingAllowed(true).addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 }

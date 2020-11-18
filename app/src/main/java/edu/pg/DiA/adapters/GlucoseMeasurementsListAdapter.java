@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.pg.DiA.R;
+import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.GlucoseMeasurementsListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.GlucoseMeasurement;
@@ -69,6 +70,7 @@ public class GlucoseMeasurementsListAdapter extends RecyclerView.Adapter<Glucose
 
                         int id = item.getItemId();
                         if (id == R.id.glucose_measurement_delete) {
+                            AppDatabase.getInstance(context).glucoseMeasurementDao().delete(changeGlucoseMeasurements.get(position));
                             return true;
                         }
                         else {

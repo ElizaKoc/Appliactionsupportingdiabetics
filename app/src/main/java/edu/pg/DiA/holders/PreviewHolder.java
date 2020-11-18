@@ -9,13 +9,13 @@ import edu.pg.DiA.R;
 
 public class PreviewHolder extends RecyclerView.ViewHolder{
 
-    public TextView alarmType, time, isCyclical;
+    public TextView alarmType, time, isCyclical, buttonViewOption;
 
     public PreviewHolder(View v) {
         super(v);
         alarmType = v.findViewById(R.id.schedule_reminder_label);
         isCyclical = v.findViewById(R.id.schedule_is_cyclical_reminder_txt);
         time = v.findViewById(R.id.schedule_time_reminder_txt);
-        //buttonViewOption = v.findViewById(R.id.glucose_ms_list_options);
+        buttonViewOption = v.findViewById(R.id.schedule_reminder_options);
     }
 }
