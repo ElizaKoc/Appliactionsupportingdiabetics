@@ -1,0 +1,25 @@
+package edu.pg.DiA.ui.medicines;
+
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import edu.pg.DiA.R;
+
+public class EditMedicineViewModel extends AndroidViewModel {
+
+    private MutableLiveData<Integer> title;
+
+    public EditMedicineViewModel(@NonNull Application application) {
+        super(application);
+        title = new MutableLiveData<>();
+        title.setValue(R.string.edit_medicine);
+    }
+
+    public LiveData<Integer> getTitle() {
+        return title;
+    }
+}

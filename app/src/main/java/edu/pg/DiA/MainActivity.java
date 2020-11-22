@@ -115,16 +115,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setHighlightProfile = navigationView.getMenu().findItem(R.id.nav_profile);
             setHighlightProfile.setChecked(true);
 
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_profile, R.id.nav_medicines, R.id.nav_diet, R.id.nav_glucose_measurements, R.id.nav_weight_measurements, R.id.nav_help, R.id.nav_journal, R.id.nav_reports, R.id.nav_settings, R.id.nav_schedule)
-                    .setDrawerLayout(drawer)
-                    .build();
-            //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            //NavigationUI.setupWithNavController(navigationView, navController);
-
             View hView =  navigationView.getHeaderView(0);
             TextView navFirstName = (TextView) hView.findViewById(R.id.nav_first_name);
             navFirstName.setText(User.getCurrentUser().firstName);
@@ -165,30 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             this.finish();
         }
-
-
-        //db.userDao().insert(new User("TEST", "Pink", 1995, 150, "M"));
-        //List<User> t = (List<User>) db.userDao().getAll();
-
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_profile, R.id.nav_medicines, R.id.nav_diet, R.id.nav_glucose_measurements, R.id.nav_weight_measurements, R.id.nav_help, R.id.nav_journal, R.id.nav_reports, R.id.nav_settings, R.id.nav_schedule)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);*/
     }
 
     @Override
@@ -227,40 +193,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle(getTitle());
         }
     }
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_settings) {
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }*/
-
-    /*protected void getAndSetIntentData() {
-        if(getIntent().hasExtra("firstName")) {
-            //Getting Data from Intent
-            firstName = getIntent().getStringExtra("firstName");
-
-            //Setting Intent Data
-            navFirstName.setText(firstName);
-        } else{
-            Toast.makeText(this, "Brak danych do wyświetlenia", Toast.LENGTH_SHORT).show();
-        }
-    } */
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -333,9 +265,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if(id == R.id.nav_settings) {
             fragmentClass = SettingsFragment.class;
         }
-        else if(id == R.id.nav_help) {
+        /*else if(id == R.id.nav_help) {
             fragmentClass = HelpFragment.class;
-        }
+        }*/
         else if(id == R.id.nav_profile_list) {
             fragmentClass = ProfileFragment.class;
             Intent intent = new Intent(this, LoadProfilesActivity.class);

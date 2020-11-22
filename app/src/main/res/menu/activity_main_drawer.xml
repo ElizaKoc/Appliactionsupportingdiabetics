@@ -50,11 +50,11 @@
        <!-- <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/menu_settings" />-->
+            android:title="@string/menu_settings" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_baseline_help_24"
-            android:title="@string/menu_help" />
+            android:title="@string/menu_help" />-->
         <item
             android:id="@+id/nav_profile_list"
             android:icon="@drawable/ic_baseline_supervisor_account_24"

@@ -18,18 +18,23 @@ import edu.pg.DiA.MainActivity;
 import edu.pg.DiA.R;
 import edu.pg.DiA.database.AppDatabase;
 import edu.pg.DiA.holders.ProfileListViewHolder;
+import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
 import edu.pg.DiA.models.Reminder;
 import edu.pg.DiA.models.User;
+import edu.pg.DiA.ui.profile_list.EditProfileFragment;
 
 public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHolder>{
 
     private Context context;
+    private EventListener listener;
+    private User profile;
     public List<User> changeProfiles = null;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ProfileListAdapter(Context context) {
+    public ProfileListAdapter(Context context, EventListener listener) {
         this.context = context;
+        this.listener = listener;
     }
 
     public void setProfiles(List<User> changeProfiles) {
@@ -70,8 +75,11 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHold
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
+                        profile = changeProfiles.get(position);
+
                         int id = item.getItemId();
                         if (id == R.id.profile_edit) {
+                            listener.onEvent(new EditProfileFragment());
                             return true;
                         }
                         else if (id == R.id.profile_delete) {
@@ -127,5 +135,9 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListViewHold
             return changeProfiles.size();
         }
         return 0;
+    }
+
+    public User getProfile() {
+        return profile;
     }
 }

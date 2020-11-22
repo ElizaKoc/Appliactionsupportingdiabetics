@@ -49,27 +49,12 @@ public class LoadProfilesActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 onBackPressed();
-
-                Toast.makeText(getApplicationContext(), "Back clicked!",
-                        Toast.LENGTH_SHORT).show();
             }
         });
 
         ft.add(R.id.profile_list_fragment, profileListFragment);
         ft.commit();
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void onBackPressed() {

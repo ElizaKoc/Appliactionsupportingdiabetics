@@ -25,6 +25,9 @@ public interface UserDao {
     @Query("SELECT first_name FROM user WHERE id = :uId")
     String getUserName(int uId);
 
+    @Query("UPDATE user SET first_name = :firstName, last_name = :lastName, birth_year = :birthYear, height_cm = :height, sex = :sex WHERE id = :uId")
+    void updateProfile(String firstName, String lastName, int birthYear, int height, String sex, int uId);
+
     /*@Query("SELECT * FROM user WHERE id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 

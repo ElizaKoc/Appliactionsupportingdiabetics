@@ -18,6 +18,7 @@ import edu.pg.DiA.holders.MedicineListViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.models.MedicineReminderWithMedicineAndReminder;
+import edu.pg.DiA.ui.medicines.EditMedicineFragment;
 import edu.pg.DiA.ui.medicines.MedicineFragment;
 import edu.pg.DiA.ui.reminder.AddNewReminderFragment;
 
@@ -78,7 +79,7 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListViewHo
                             return true;
                         }
                         else if(id == R.id.medicine_edit) {
-
+                            listener.onEvent(new EditMedicineFragment());
                             return true;
                         }
                         else if(id == R.id.medicine_delete) {

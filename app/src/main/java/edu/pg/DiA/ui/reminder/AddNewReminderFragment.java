@@ -1,7 +1,9 @@
 package edu.pg.DiA.ui.reminder;
 
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,9 +14,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,8 +37,10 @@ import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import edu.pg.DiA.R;
@@ -57,6 +63,8 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
     private TextView spinnerMedicineOptionLabel, medicineDoseLabel;
     private EditText medicineDoseEdit, reminderDateEdit, reminderTimeEdit;
     private Spinner alarmTypeEdit, medicineOptionEdit, repeatEdit, weekdayEdit;
+
+    final Calendar myCalendar = Calendar.getInstance();
 
     private AppDatabase db;
     private MedicineDao medicineDao;
@@ -155,6 +163,51 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         setDefaultValues();
         setOnItemSelected(alarmTypeEdit);
         setOnItemSelected(repeatEdit);
+
+        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                reminderTimeEdit.setText( selectedHour + ":" + selectedMinute);
+            }
+        };
+
+        reminderTimeEdit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), time, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), true); //Yes 24 hour time
+                mTimePicker.setTitle("Ustaw czas");
+                mTimePicker.show();
+            }
+        });
+
+
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
+        reminderDateEdit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getActivity(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         Button addButton =  root.findViewById(R.id.add_button_new_reminder);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -432,6 +485,13 @@ public class AddNewReminderFragment extends Fragment implements AdapterView.OnIt
         weekdayEdit.setSelection(0);
 
         setVisibilityGone();
+    }
+
+    private void updateLabel() {
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+
+        reminderDateEdit.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override

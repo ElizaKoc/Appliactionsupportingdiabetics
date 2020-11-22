@@ -146,6 +146,5 @@ public class MedicineFragment extends Fragment implements EventListener {
 
         // Commit the transaction
         transaction.commit();
-
     }
 }

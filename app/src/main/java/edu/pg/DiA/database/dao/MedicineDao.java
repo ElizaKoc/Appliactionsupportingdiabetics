@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.util.Date;
 import java.util.List;
 
 import edu.pg.DiA.models.Medicine;
@@ -20,6 +21,12 @@ public interface MedicineDao {
 
     @Query("SELECT * FROM medicine WHERE id = :mId")
     LiveData<Medicine> getMedicine(int mId);
+
+    @Query("SELECT * FROM medicine WHERE id = :mId")
+    Medicine getMedicineToEdit(int mId);
+
+    @Query("UPDATE medicine SET name = :name, description = :description, unit_id = :uId WHERE id = :mId")
+    void updateMedicine(String name, String description, int uId, int mId);
 
     @Query("SELECT id FROM medicine WHERE user_id = :uId AND name = :name")
     int getMedicineId(int uId, String name);

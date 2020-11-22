@@ -134,8 +134,6 @@ public class MedicinesFragment extends Fragment implements EventListener {
 
     @Override
     public void onEvent(Fragment fragment) {
-        Toast.makeText(getContext(), "IT WORKS!",
-                Toast.LENGTH_SHORT).show();
 
         Bundle args = new Bundle();
         args.putInt("medicine_id", medicineListAdapter.getMedicine().mId);

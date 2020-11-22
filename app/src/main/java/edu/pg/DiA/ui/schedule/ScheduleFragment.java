@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,6 @@ public class ScheduleFragment extends Fragment{
 
     private ScheduleViewModel scheduleViewModel;
     private FragmentManager fragmentManager;
-    private CalendarView calenderView;
     private CompactCalendarView compactCalendarView;
     private TextView dateView;
     private  String strDate;
@@ -95,19 +93,6 @@ public class ScheduleFragment extends Fragment{
             }
         });
 
-       /* calenderView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-
-                // Store the value of date with format in String type Variable
-                // Add 1 in month because month index is start with 0
-
-                strDate = year + "-" + String.format("%02d", (month + 1)) + "-" + String.format("%02d", dayOfMonth);
-                dateView.setText(strDate);
-            }
-        });*/
-
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
@@ -143,7 +128,6 @@ public class ScheduleFragment extends Fragment{
         fragmentManager = getActivity().getSupportFragmentManager();
         ((DrawerLocker)getActivity()).setDrawerLocked(false);
 
-        //calenderView = (CalendarView) root.findViewById(R.id.calendar_view);
         setCalendar(root);
         compactCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
         dateView = (TextView) root.findViewById(R.id.date_view);

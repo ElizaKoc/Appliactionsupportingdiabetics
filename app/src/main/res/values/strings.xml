@@ -65,6 +65,9 @@
     <string name="profile_weight_label">Waga:</string>
     <string name="profile_weight_unit">kg</string>
 
+    <!--Edit profile-->
+    <string name="edit_profile">Edytuj dane profilowe</string>
+
     <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!--Medicine list-->
     <string name="add_new_medicine">Dodaj nowy lek</string>
@@ -77,6 +80,9 @@
     <string name="medicine_description">Podaj opis</string>
     <string name="medicine_unit_label">Jednostka</string>
     <string name="medicine_units">Podaj jednostki</string>
+
+    <!--Edit medicine-->
+    <string name="edit_medicine">Edytuj dane leku</string>
 
     <!--Medicine View-->
     <string name="medicine_description_label">Opis</string>
@@ -159,6 +165,9 @@
 
     <!--Add note-->
     <string name="menu_add_new_note">Dodaj nową notatkę</string>
+
+    <!--Edit note-->
+    <string name="edit_note">Edytuj notatkę</string>
 
     <string name="note_title">Podaj tytuł</string>
     <string name="note_body">Podaj treść</string>

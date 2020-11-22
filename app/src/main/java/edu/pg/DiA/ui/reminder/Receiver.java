@@ -60,10 +60,5 @@ public class Receiver extends BroadcastReceiver {
         Notification notificationCompat = builder.build();
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         managerCompat.notify(reminderId, notificationCompat);
-
-
-        /*Intent intentNew = new Intent(context, IntentServiceReminder.class);
-        intentNew.putExtra("reminder_id", reminderId);
-        context.startService(intentNew);*/
     }
 }

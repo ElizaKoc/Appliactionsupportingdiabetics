@@ -30,11 +30,11 @@ public class AddNewProfileFragment extends Fragment implements AdapterView.OnIte
 
     private AddNewProfileViewModel addNewProfileViewModel;
 
-    public  EditText firstNameEdit;
-    public  EditText lastNameEdit;
-    public  EditText birthYearEdit;
-    public  EditText heightEdit;
-    public Spinner genderEdit;
+    private  EditText firstNameEdit;
+    private  EditText lastNameEdit;
+    private  EditText birthYearEdit;
+    private  EditText heightEdit;
+    private Spinner genderEdit;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

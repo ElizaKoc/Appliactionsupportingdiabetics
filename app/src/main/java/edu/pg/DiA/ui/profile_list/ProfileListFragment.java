@@ -27,14 +27,16 @@ import java.util.List;
 import edu.pg.DiA.R;
 import edu.pg.DiA.adapters.ProfileListAdapter;
 import edu.pg.DiA.adapters.WeightMeasurementsListAdapter;
+import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.User;
 import edu.pg.DiA.ui.add_new_profile.AddNewProfileFragment;
 import edu.pg.DiA.widgets.CustomRecyclerView;
 
-public class ProfileListFragment extends Fragment {
+public class ProfileListFragment extends Fragment implements EventListener {
 
     private ProfileListViewModel profileListViewModel;
     private ProfileListAdapter profileListAdapter;
+    private FragmentManager fragmentManager;
     public List<User> profiles;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,10 +86,11 @@ public class ProfileListFragment extends Fragment {
 
     private void initView(View root) {
         Context context = getActivity().getApplicationContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
         CustomRecyclerView recyclerView = root.findViewById(R.id.profile_list);
         View mEmptyView = root.findViewById(R.id.empty_drops_profile_list);
         recyclerView.showIfEmpty(mEmptyView);
-        profileListAdapter = new ProfileListAdapter(requireContext());
+        profileListAdapter = new ProfileListAdapter(requireContext(), this);
         recyclerView.setAdapter(profileListAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -125,5 +128,24 @@ public class ProfileListFragment extends Fragment {
                 transaction.commit();
             }
         });
+    }
+
+    @Override
+    public void onEvent(@Nullable Fragment fragment) {
+
+        Bundle args = new Bundle();
+        args.putInt("profile_id", profileListAdapter.getProfile().uId);
+        fragment.setArguments(args);
+
+        // Create new fragment and transaction
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.profile_list_fragment, fragment);
+        transaction.setReorderingAllowed(true).addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 }

@@ -113,11 +113,6 @@ public class AddNewMedicineFragment extends Fragment implements AdapterView.OnIt
                                 Toast.LENGTH_SHORT).show();
 
                     } else {
-                           /*Fragment profileListFragment = new ProfileListFragment();
-                           FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                           transaction.replace(R.id.profile_list_fragment, profileListFragment);
-                           transaction.commit();*/
-
                         clear();
 
                         Toast.makeText(getContext(), "Dodano lek",
@@ -163,7 +158,6 @@ public class AddNewMedicineFragment extends Fragment implements AdapterView.OnIt
             // Notify the selected item text
             Toast.makeText( getActivity().getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override

@@ -19,6 +19,7 @@ import edu.pg.DiA.holders.JournalViewHolder;
 import edu.pg.DiA.interfaces.EventListener;
 import edu.pg.DiA.models.Medicine;
 import edu.pg.DiA.models.Note;
+import edu.pg.DiA.ui.journal.EditNoteFragment;
 import edu.pg.DiA.ui.journal.NoteFragment;
 
 
@@ -76,7 +77,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalViewHolder>{
 
                         int id = item.getItemId();
                         if(id == R.id.note_edit) {
-
+                            listener.onEvent(new EditNoteFragment());
                             return true;
                         }
                         else if(id == R.id.note_delete) {

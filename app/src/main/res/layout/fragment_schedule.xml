@@ -7,22 +7,6 @@
     android:background="@color/mr_cast_meta_default_text_color"
     tools:context="edu.pg.DiA.ui.schedule.ScheduleFragment">
 
-    <!--<TextView
-        android:id="@+id/text_schedule"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_horizontal"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
     <TextView
         android:id="@+id/date_view"
         android:layout_width="wrap_content"
@@ -36,16 +20,6 @@
         app:layout_constraintEnd_toEndOf="@+id/compact_calendar_view"
         app:layout_constraintStart_toStartOf="@+id/compact_calendar_view"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<CalendarView
-        android:id="@+id/calendar_view"
-        android:dateTextAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:layout_width="348dp"
-        android:layout_height="338dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_view" />-->
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         android:id="@+id/compact_calendar_view"
