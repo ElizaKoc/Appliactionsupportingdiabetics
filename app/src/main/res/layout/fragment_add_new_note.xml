@@ -31,7 +31,7 @@
         android:layout_marginRight="8dp"
         android:autofillHints=""
         android:ems="10"
-        android:maxLength="10"
+        android:maxLength="15"
         android:hint="@string/note_title"
         android:inputType="textPersonName"
         android:textColor="@color/black"
